@@ -1,155 +1,102 @@
 # Grounded Engineering Document Workflow Agent
 
-A practical workflow-first RAG project for robotics engineering documentation.
+一个面向工程文档的工作流式 RAG 项目，聚焦机器人文档场景，当前支持：
 
-This project builds a grounded document workflow system over official engineering docs and currently supports:
+- Grounded Q&A
+- 文档 / 流程 Compare
+- Checklist Extraction
 
-- grounded Q&A
-- document and procedure comparison
-- checklist extraction
+项目目标不是做自由式智能体，而是做一个结构清晰、可调试、可演示、适合作品集展示的工程化 AI workflow 系统。
 
-The current MVP focuses on ROS 2, PX4, MoveIt, and Isaac ROS documentation, with structured outputs, citation-preserving retrieval, and insufficient-evidence fallback.
+## 项目概述
 
-## Why this project
-
-Many engineering tasks are not open-ended chat tasks. They are workflow tasks:
-
-- answer a technical question from documentation
-- compare two procedures or setup paths
-- turn a troubleshooting or setup document into an actionable checklist
-
-This project is designed as a practical AI engineering portfolio project, so the emphasis is on:
-
-- working MVP first
-- grounded outputs with citations
-- clear module boundaries
-- inspectable intermediate artifacts
-- easy demo and easy explanation in interviews
-
-## Current scope
-
-Implemented:
-
-- ingestion pipeline for a first batch of engineering docs
-- HTML crawling, cleaning, tagging, chunking, and indexing
-- BM25 retrieval
-- dense retrieval using TF-IDF + SVD embeddings
-- hybrid retrieval with metadata-aware reranking
-- grounded Q&A
-- grounded comparison workflow
-- grounded checklist workflow
-- optional LLM synthesis layers for Ask, Compare, and Checklist
-- citation validation and insufficient-evidence fallback
-- lightweight manual evaluation runner
-- Streamlit demo
-
-Out of scope for this MVP:
-
-- autonomous multi-agent planning
-- cloud deployment
-- complex frontend stack
-- production auth and infrastructure
-
-## Current data snapshot
-
-Current local corpus snapshot in this repo:
-
-- 4 official documentation sources
-- 29 processed documents
-- 29 tagged documents
-- 450 retrieval chunks
-- 9 manual workflow evaluation cases
-
-Primary sources:
+当前 MVP 主要覆盖以下官方文档：
 
 - ROS 2 official docs
 - PX4 official docs
 - MoveIt docs
 - Isaac ROS docs
 
-## Architecture
+当前本地语料规模：
 
-The system follows an explicit workflow pipeline rather than a free-form autonomous agent design:
+- 4 个官方文档源
+- 29 篇处理后文档
+- 450 个检索 chunk
+- 9 条手动 workflow 评测样例
 
-1. ingestion
-2. cleaning
-3. chunking
-4. retrieval
-5. reranking
-6. structured generation
-7. citation and grounding
-8. demo and evaluation
+## 系统架构
 
-High-level module map:
+![系统架构图](structure.png)
 
-- `app/ingestion/`
-  - crawl, extract, tag, and chunk engineering documentation
-- `app/retrieval/`
-  - BM25, dense, hybrid retrieval, query routing, ranking
-- `app/workflows/`
-  - `ask.py`, `compare.py`, `checklist.py`
-- `app/prompts/`
-  - grounded prompt templates for LLM synthesis
-- `app/models/`
-  - structured output schemas
-- `app/ui/demo.py`
-  - Streamlit demo
-- `scripts/`
-  - indexing, testing, evaluation, and batch runners
+系统采用显式流水线，而不是自由规划式 agent：
 
-## Retrieval and groundedness design
+1. 文档抓取
+2. 正文提取与清洗
+3. 元数据打标
+4. 文档分块
+5. 检索索引构建
+6. 混合检索与重排
+7. Ask / Compare / Checklist 工作流
+8. 可选 LLM grounded synthesis
+9. 评测与 Demo
 
-This project is intentionally built around grounded, inspectable evidence flow.
+核心目录：
 
-### Retrieval stack
+- `app/ingestion/`：抓取、抽取、打标、分块
+- `app/retrieval/`：BM25、dense、hybrid、query routing、reranking
+- `app/workflows/`：`ask.py`、`compare.py`、`checklist.py`
+- `app/prompts/`：grounded prompt 模板
+- `app/models/`：结构化输出 schema
+- `app/ui/demo.py`：Streamlit Demo
+- `scripts/`：数据处理、测试、评测脚本
 
-- BM25 over chunk text
-- dense retrieval using local TF-IDF + TruncatedSVD vectors
-- hybrid retrieval with reciprocal-rank style fusion
-- rule-based query routing for likely source and document type
-- metadata-aware reranking using:
-  - source
-  - doc_type
-  - topic
-  - section_path
+## 真实实现流程
 
-### Preserved metadata
+当前真实已实现的主链路是：
 
-Each chunk and citation preserves:
+`crawl_plan -> raw HTML -> cleaned documents -> tagged documents -> chunks -> local index -> hybrid retrieval -> routing/reranking -> workflow output -> citations`
 
-- title
-- source
-- version
-- section_path
-- URL
-- score
-- snippet
+对应产物：
 
-This makes outputs easier to debug and easier to explain in a demo.
+- `data/raw/`：原始 HTML
+- `data/processed/documents.jsonl`：清洗后文档
+- `data/processed/tagged_documents.jsonl`：打标后文档
+- `data/processed/chunks.jsonl`：检索 chunk
+- `data/index/`：BM25 / dense / metadata / manifest
 
-### Groundedness rules
+## 检索与 Groundedness 设计
 
-All three workflows are designed around the same principles:
+检索层当前使用：
 
-- retrieve evidence first
-- synthesize only from retrieved evidence
-- validate citation ids when LLM output is used
-- return `insufficient_evidence` instead of guessing
-- keep structured outputs small and inspectable
+- BM25
+- dense retrieval（TF-IDF + TruncatedSVD）
+- hybrid retrieval
+- rule-based query routing
+- metadata-aware reranking
 
-## Workflow overview
+保留的核心 metadata：
 
-### 1. Grounded Q&A
+- `title`
+- `source`
+- `version`
+- `section_path`
+- `url`
+- `score`
+- `snippet`
 
-File:
+Groundedness 约束：
 
-- `app/workflows/ask.py`
+- 先检索，后生成
+- Ask / Compare / Checklist 都只基于检索证据输出
+- citations 直接绑定真实 chunk
+- 证据不足时返回 `insufficient_evidence`
+- 不允许无依据扩写
 
-Input:
+## 三个工作流
 
-- a user engineering question
+### 1. Ask
 
-Output:
+输入一个工程问题，输出：
 
 - `query`
 - `answer`
@@ -157,25 +104,15 @@ Output:
 - `confidence`
 - `citations`
 
-Behavior:
+特点：
 
-- uses the existing hybrid retrieval pipeline
-- uses top evidence chunks as support
-- can answer through a non-LLM extractive path
-- can optionally add LLM grounded synthesis on top
-- validates citation ids before returning the final answer
+- 走现有 hybrid retrieval
+- 支持非 LLM 抽取式 baseline
+- 支持可选 LLM grounded synthesis
 
-### 2. Grounded Compare
+### 2. Compare
 
-File:
-
-- `app/workflows/compare.py`
-
-Input:
-
-- a comparison query such as `Compare A with B`
-
-Output:
+输入一个比较问题，输出：
 
 - `query`
 - `summary`
@@ -186,26 +123,16 @@ Output:
 - `confidence`
 - `citations`
 
-Behavior:
+特点：
 
-- parses comparison targets with transparent rules
-- retrieves shared and side-specific evidence
-- groups evidence into the two sides when possible
-- supports a non-LLM rule-based comparison path
-- supports optional LLM grounded comparison synthesis
+- 支持 `Compare A and B / with / vs / versus`
+- 先解析比较目标，再检索双边证据
+- 支持 rule-based compare baseline
+- 支持可选 LLM grounded compare synthesis
 
-### 3. Grounded Checklist Extraction
+### 3. Checklist
 
-File:
-
-- `app/workflows/checklist.py`
-
-Input:
-
-- a checklist-oriented query
-- or a pre-retrieved evidence set
-
-Output:
+输入一个 setup / troubleshooting / procedure 相关请求，输出：
 
 - `query`
 - `checklist_title`
@@ -217,48 +144,48 @@ Output:
 - `confidence`
 - `citations`
 
-Behavior:
+特点：
 
-- retrieves procedural, setup, or troubleshooting evidence
-- prefers high-value sections such as setup, installation, and troubleshooting
-- builds a simple rule-based checklist baseline
-- optionally applies LLM grounded checklist synthesis
-- falls back safely if evidence or LLM output is weak
+- 可直接接收 query，也可接收 evidence set
+- 优先 procedural / setup / troubleshooting 证据
+- 先走规则式 checklist baseline
+- 再可选接 LLM grounded synthesis
 
-## With and without LLM
+## 有无 LLM 的区别
 
-One of the main design goals is to keep the system useful even without an external model.
+这个项目的一个重点是：**没有 LLM 也能工作**。
 
-### Without LLM
+### 不开 LLM
 
-The system still supports:
+系统仍然可以完成：
 
-- hybrid retrieval
+- 混合检索
 - reranking
 - citations
 - insufficient-evidence fallback
-- rule-based or extractive grounded outputs
+- Ask / Compare / Checklist 的基础 grounded 输出
 
-This is useful for:
+这适合：
 
-- local debugging
-- deterministic demos
-- showing the non-LLM baseline in interviews
+- 本地调试
+- 稳定演示
+- 展示非 LLM baseline
 
-### With LLM
+### 开启 LLM
 
-The LLM is used only for final grounded synthesis, not for retrieval.
+LLM 只用于**最终 grounded synthesis**，不参与：
 
-This means:
+- 抓取
+- 清洗
+- 分块
+- 索引构建
+- 检索
+- reranking
 
-- retrieval logic stays unchanged
-- evidence comes from the same hybrid pipeline
-- citations are still validated
-- outputs remain structured
+也就是说，LLM 是可选增强层，不是系统前提。
 
-Environment variables can be provided through system env or a project-root `.env`.
-
-Examples:
+项目支持从系统环境变量或根目录 `.env` 读取配置。  
+例如使用 DeepSeek：
 
 ```env
 GROUNDED_QA_LLM_API_KEY=your_api_key
@@ -274,138 +201,58 @@ GROUNDED_CHECKLIST_LLM_MODEL=deepseek-chat
 GROUNDED_CHECKLIST_LLM_BASE_URL=https://api.deepseek.com
 ```
 
-## Evaluation
+## 评测
 
-### Retrieval evaluation
+### 检索评测
 
-The repo already includes:
+已有检索评测资产：
 
 - `data/eval/seed_queries.json`
 - `scripts/run_retrieval_eval.py`
 - `data/eval/retrieval_eval_results.json`
 - `data/eval/retrieval_eval_results.md`
 
-This supports manual inspection of retrieval quality over seed queries.
+### Workflow 手动评测
 
-### Workflow manual evaluation
-
-New finishing assets added in this step:
+已有 workflow 手动评测资产：
 
 - `data/eval/manual_eval_set.json`
 - `scripts/run_manual_eval.py`
 - `data/eval/manual_eval_report.json`
 - `data/eval/manual_eval_report.md`
 
-The manual eval set currently contains:
+当前手动评测集包含：
 
-- 3 Ask cases
-- 3 Compare cases
-- 3 Checklist cases
+- Ask：3 条
+- Compare：3 条
+- Checklist：3 条
 
-Current local non-LLM batch run summary:
+当前本地非 LLM 批量跑通结果：
 
-- 9 / 9 cases returned grounded outputs
-- Ask: 3 grounded answers
-- Compare: 3 grounded comparisons
-- Checklist: 3 grounded checklists
-
-Run the manual evaluation:
-
-```bash
-python scripts/run_manual_eval.py --disable-llm --log-level INFO
-```
-
-Run the same evaluation with optional LLM synthesis enabled:
-
-```bash
-python scripts/run_manual_eval.py --log-level INFO
-```
+- 9 / 9 返回 grounded 输出
 
 ## Demo
 
-The project now includes a lightweight Streamlit demo:
+项目包含一个轻量 Streamlit demo：
 
 - `app/ui/demo.py`
 
-Features:
+功能：
 
-- three tabs: Ask, Compare, Checklist
-- clearly rendered structured outputs
-- citation display with source, title, section path, URL, and snippet
-- optional LLM synthesis toggle
-- minimal UI intended for project demos rather than product polish
+- 三个 tab：`Ask`、`Compare`、`Checklist`
+- 展示结构化输出
+- 展示 citations
+- 支持开关 LLM synthesis
 
-Run it with:
+运行方式：
 
 ```bash
 streamlit run app/ui/demo.py
 ```
 
-If `streamlit` is not installed yet:
+## 快速运行
 
-```bash
-pip install streamlit
-```
-
-## Example outputs
-
-### Example Ask output
-
-Query:
-
-```text
-How do I create a ROS 2 workspace and build packages with colcon for a new project?
-```
-
-Example grounded answer:
-
-```json
-{
-  "status": "grounded_answer",
-  "confidence": 0.9,
-  "answer": "Based on the retrieved documentation, the main procedure is: 1. ... source your main ROS 2 distro install as your underlay ... 2. ... create and build packages in a new workspace ..."
-}
-```
-
-### Example Compare output
-
-Query:
-
-```text
-Compare PX4 first simulator build setup with PX4 ROS 2 offboard control example setup
-```
-
-Example grounded comparison:
-
-```json
-{
-  "status": "grounded_comparison",
-  "confidence": 0.88,
-  "summary": "The retrieved evidence compares PX4 first simulator build setup and PX4 ROS 2 offboard control example setup."
-}
-```
-
-### Example Checklist output
-
-Query:
-
-```text
-Create a checklist for running the PX4 ROS 2 offboard control example
-```
-
-Example grounded checklist:
-
-```json
-{
-  "status": "grounded_checklist",
-  "confidence": 0.9,
-  "checklist_title": "Create a checklist for running the PX4 ROS 2 offboard control example"
-}
-```
-
-## How to run the main pipeline
-
-### Data preparation
+### 数据处理链路
 
 ```bash
 python scripts/crawl_docs.py
@@ -415,7 +262,7 @@ python scripts/build_chunks.py
 python scripts/build_index.py
 ```
 
-### Workflow tests
+### Workflow 测试
 
 ```bash
 python scripts/test_grounded_qa.py "What is NITROS in Isaac ROS?"
@@ -423,35 +270,26 @@ python scripts/test_compare.py "Compare MoveIt and Isaac ROS"
 python scripts/test_checklist.py "Create a troubleshooting checklist for PX4 flash overflow build errors"
 ```
 
-### Retrieval test
+### 手动评测
 
 ```bash
-python scripts/test_retrieval.py --mode hybrid --top-k 5 "ROS 2 offboard control example"
+python scripts/run_manual_eval.py --disable-llm --log-level INFO
 ```
 
-## Project strengths for portfolio use
+## 项目亮点
 
-This project is a good portfolio piece because it demonstrates:
+这个项目适合作品集展示的原因在于：
 
-- end-to-end AI workflow design, not just prompting
-- document ingestion and retrieval engineering
-- grounded generation with citation validation
-- hybrid retrieval and rule-based reranking
-- explicit abstention through insufficient-evidence handling
-- modular Python code that is easy to explain in an interview
+- 不是单纯 prompt 工程，而是完整 workflow 系统
+- 有真实文档 ingestion / retrieval / reranking / grounding 链路
+- Ask / Compare / Checklist 三个任务都已落地
+- citations 和 insufficient-evidence fallback 都已实现
+- 同时支持非 LLM baseline 和 LLM 增强版
+- 结构清晰，适合在面试里讲系统设计与工程权衡
 
-## Current limitations
+## 当前限制
 
-- the current corpus is intentionally small and high-value, not a full-site crawl
-- manual evaluation is still lightweight and human-reviewed
-- no API layer or deployment package yet
-- no checklist post-editing or interactive reviewer loop yet
-- the compare and checklist baselines are still intentionally simple
-
-## Next practical upgrades
-
-- add a FastAPI backend for demo-ready serving
-- add a reviewer-oriented debug dump for evidence and synthesis traces
-- expand the manual eval set with explicit relevance labels
-- improve checklist step extraction from long procedural sections
-- add small benchmark metrics over the manual eval set
+- 当前语料仍然是首批高价值页面，不是全站规模
+- 手动评测集较小，主要用于 demo 和人工 review
+- 还没有部署 API
+- checklist 和 compare 仍然保持了 MVP 风格的简洁实现
