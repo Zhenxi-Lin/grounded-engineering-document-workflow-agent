@@ -1,0 +1,83 @@
+[
+  {
+    "case_id": "ask_01",
+    "workflow": "ask",
+    "category": "procedural",
+    "query": "How do I create a ROS 2 workspace and build packages with colcon for a new project?",
+    "expected_status": "grounded_answer",
+    "expected_focus": "ROS 2 workspace creation, underlay or overlay setup, and colcon build flow.",
+    "review_notes": ""
+  },
+  {
+    "case_id": "ask_02",
+    "workflow": "ask",
+    "category": "factual",
+    "query": "What is NITROS in Isaac ROS, and what problem is it trying to solve in accelerated ROS 2 pipelines?",
+    "expected_status": "grounded_answer",
+    "expected_focus": "Isaac ROS NITROS concept and why it reduces data movement or conversion overhead.",
+    "review_notes": ""
+  },
+  {
+    "case_id": "ask_03",
+    "workflow": "ask",
+    "category": "troubleshooting",
+    "query": "PX4 build fails with a flash overflow error. What usually causes this and how can I fix it?",
+    "expected_status": "grounded_answer",
+    "expected_focus": "Firmware too large, unsupported GCC, and removing unneeded modules or drivers.",
+    "review_notes": ""
+  },
+  {
+    "case_id": "compare_01",
+    "workflow": "compare",
+    "category": "procedural_compare",
+    "query": "Compare ROS 2 official workspace creation guidance with Isaac ROS workspace setup guidance",
+    "expected_status": "grounded_comparison",
+    "expected_focus": "Shared workspace setup structure plus Isaac ROS-specific environment or container-related setup.",
+    "review_notes": ""
+  },
+  {
+    "case_id": "compare_02",
+    "workflow": "compare",
+    "category": "procedural_compare",
+    "query": "Compare PX4 first simulator build setup with PX4 ROS 2 offboard control example setup",
+    "expected_status": "grounded_comparison",
+    "expected_focus": "Simulator-first PX4 build path versus ROS 2 integration example setup and runtime differences.",
+    "review_notes": ""
+  },
+  {
+    "case_id": "compare_03",
+    "workflow": "compare",
+    "category": "procedural_compare",
+    "query": "Compare MoveIt getting started workspace setup with ROS 2 beginner workspace creation",
+    "expected_status": "grounded_comparison",
+    "expected_focus": "Both rely on colcon workspaces, but MoveIt has tutorial-specific workspace and package setup.",
+    "review_notes": ""
+  },
+  {
+    "case_id": "checklist_01",
+    "workflow": "checklist",
+    "category": "setup_checklist",
+    "query": "Create a checklist for setting up a ROS 2 workspace and building packages with colcon",
+    "expected_status": "grounded_checklist",
+    "expected_focus": "Prerequisites, workspace creation, build steps, and validation checks.",
+    "review_notes": ""
+  },
+  {
+    "case_id": "checklist_02",
+    "workflow": "checklist",
+    "category": "troubleshooting_checklist",
+    "query": "Create a troubleshooting checklist for PX4 flash overflow build errors",
+    "expected_status": "grounded_checklist",
+    "expected_focus": "Check firmware size, compiler version, and module removal options.",
+    "review_notes": ""
+  },
+  {
+    "case_id": "checklist_03",
+    "workflow": "checklist",
+    "category": "integration_checklist",
+    "query": "Create a checklist for running the PX4 ROS 2 offboard control example",
+    "expected_status": "grounded_checklist",
+    "expected_focus": "Workspace build, sourcing setup, running the example, and validating expected behavior.",
+    "review_notes": ""
+  }
+]

@@ -1,0 +1,1980 @@
+[
+  {
+    "query": "What is the difference between ROS 2 discovery and QoS, and why do they matter for distributed robotics systems?",
+    "category": "factual",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "factual",
+      "preferred_sources": [
+        "ROS 2 official docs"
+      ],
+      "preferred_doc_types": [
+        "integration",
+        "concept",
+        "reference"
+      ],
+      "topic_keywords": [
+        "difference",
+        "between",
+        "ros",
+        "discovery",
+        "qos",
+        "they",
+        "matter",
+        "distributed",
+        "robotics",
+        "systems"
+      ],
+      "routing_debug": {
+        "matched_intent": "factual",
+        "matched_sources": [
+          "ROS 2 official docs"
+        ],
+        "matched_doc_types": [
+          "integration",
+          "concept",
+          "reference"
+        ],
+        "topic_keywords": [
+          "difference",
+          "between",
+          "ros",
+          "discovery",
+          "qos",
+          "they",
+          "matter",
+          "distributed",
+          "robotics",
+          "systems"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "What is the difference between ROS 2 discovery and QoS, and why do they matter for distributed robotics systems?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.481024531024531,
+        "title": "Discovery",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Discovery"
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Concepts/Basic/About-Discovery.html",
+        "text_preview": "# Discovery Discovery of nodes happens automatically through the underlying middleware of ROS 2. It can be summarized as follows: When a node is started, it advertises its presence to other nodes on the network with..."
+      },
+      {
+        "query": "What is the difference between ROS 2 discovery and QoS, and why do they matter for distributed robotics systems?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.3327868852459016,
+        "title": "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+          "PX4 ROS 2 QoS Settings"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/middleware/uxrce_dds",
+        "text_preview": "# uXRCE-DDS (PX4-ROS 2/DDS Bridge) ## PX4 ROS 2 QoS Settings PX4 QoS settings for publishers are incompatible with the default QoS settings for ROS 2 subscribers. So if ROS 2 code needs to subscribe to a uORB topic,..."
+      },
+      {
+        "query": "What is the difference between ROS 2 discovery and QoS, and why do they matter for distributed robotics systems?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.3317540322580645,
+        "title": "ROS 2 User Guide",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 User Guide",
+          "Compatibility Issues",
+          "ROS 2 Subscriber QoS Settings"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
+        "text_preview": "# ROS 2 User Guide ## Compatibility Issues ### ROS 2 Subscriber QoS Settings ROS 2 code that subscribes to topics published by PX4 must specify a appropriate (compatible) QoS setting in order to listen to topics...."
+      },
+      {
+        "query": "What is the difference between ROS 2 discovery and QoS, and why do they matter for distributed robotics systems?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.23921108742004263,
+        "title": "Installation",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Installation",
+          "Which install should you choose?"
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Installation.html",
+        "text_preview": "# Installation ## Which install should you choose? Installing from binary packages or from source will both result in a fully-functional and usable ROS 2 install. Differences between the options depend on what you..."
+      },
+      {
+        "query": "What is the difference between ROS 2 discovery and QoS, and why do they matter for distributed robotics systems?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.23690501986276633,
+        "title": "Using ros2doctor to identify issues",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Using ros2doctor to identify issues",
+          "When your ROS 2 setup is not running as expected, you can check its settings with the ros2doctor tool."
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Getting-Started-With-Ros2doctor.html",
+        "text_preview": "# Using ros2doctor to identify issues ## When your ROS 2 setup is not running as expected, you can check its settings with the ros2doctor tool. ros2doctor checks all aspects of ROS 2, including platform, version,..."
+      }
+    ]
+  },
+  {
+    "query": "What frame conventions differ between PX4 and ROS 2, and what conversions are needed when sending trajectory setpoints?",
+    "category": "factual",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "factual",
+      "preferred_sources": [
+        "PX4 official docs",
+        "ROS 2 official docs"
+      ],
+      "preferred_doc_types": [
+        "integration",
+        "concept",
+        "reference"
+      ],
+      "topic_keywords": [
+        "frame",
+        "conventions",
+        "differ",
+        "between",
+        "px4",
+        "ros",
+        "conversions",
+        "needed",
+        "sending",
+        "trajectory",
+        "setpoints"
+      ],
+      "routing_debug": {
+        "matched_intent": "factual",
+        "matched_sources": [
+          "PX4 official docs",
+          "ROS 2 official docs"
+        ],
+        "matched_doc_types": [
+          "integration",
+          "concept",
+          "reference"
+        ],
+        "topic_keywords": [
+          "frame",
+          "conventions",
+          "differ",
+          "between",
+          "px4",
+          "ros",
+          "conversions",
+          "needed",
+          "sending",
+          "trajectory",
+          "setpoints"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "What frame conventions differ between PX4 and ROS 2, and what conversions are needed when sending trajectory setpoints?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.49175403225806447,
+        "title": "ROS 2 User Guide",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 User Guide",
+          "Compatibility Issues",
+          "ROS 2 & PX4 Frame Conventions"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
+        "text_preview": "# ROS 2 User Guide ## Compatibility Issues ### ROS 2 & PX4 Frame Conventions To rotate a vector from FLU to FRD a pi rotation around the X-axis (front) is sufficient. To rotate a vector from FRD to FLU a pi rotation..."
+      },
+      {
+        "query": "What frame conventions differ between PX4 and ROS 2, and what conversions are needed when sending trajectory setpoints?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.4453846153846153,
+        "title": "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+          "Fast-RTPS to uXRCE-DDS Migration Guidelines",
+          "Dependencies do not need to be removed",
+          "Topics no longer need to be synced between client and agent."
+        ],
+        "url": "https://docs.px4.io/v1.16/en/middleware/uxrce_dds",
+        "text_preview": "# uXRCE-DDS (PX4-ROS 2/DDS Bridge) ## Fast-RTPS to uXRCE-DDS Migration Guidelines ### Dependencies do not need to be removed #### Topics no longer need to be synced between client and agent. The list of bridged topics..."
+      },
+      {
+        "query": "What frame conventions differ between PX4 and ROS 2, and what conversions are needed when sending trajectory setpoints?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.4027868852459016,
+        "title": "ROS 2 Offboard Control Example",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 Offboard Control Example"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/offboard_control",
+        "text_preview": "# ROS 2 Offboard Control Example The following C++ example shows how to do position control in offboard mode from a ROS 2 node. The example starts sending setpoints, enters offboard mode, arms, ascends to 5 metres,..."
+      },
+      {
+        "query": "What frame conventions differ between PX4 and ROS 2, and what conversions are needed when sending trajectory setpoints?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.35369863013698627,
+        "title": "Simulation",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Simulation",
+          "SITL Simulation Environment",
+          "Run Simulation Faster than Realtime"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/simulation/",
+        "text_preview": "# Simulation ## SITL Simulation Environment ### Run Simulation Faster than Realtime SITL can be run faster or slower than real-time when using Gazebo, Gazebo Classic, or jMAVSim. The speed factor is set using the..."
+      },
+      {
+        "query": "What frame conventions differ between PX4 and ROS 2, and what conversions are needed when sending trajectory setpoints?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.2738888888888889,
+        "title": "Basic Concepts",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Basic Concepts",
+          "Drone Components & Parts",
+          "ESCs & Motors"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/getting_started/px4_basic_concepts",
+        "text_preview": "# Basic Concepts ## Drone Components & Parts ### ESCs & Motors Many PX4 drones use brushless motors that are driven by the flight controller via an Electronic Speed Controller (ESC) (the ESC converts a signal from the..."
+      }
+    ]
+  },
+  {
+    "query": "What is NITROS in Isaac ROS, and what problem is it trying to solve in accelerated ROS 2 pipelines?",
+    "category": "factual",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "factual",
+      "preferred_sources": [
+        "Isaac ROS docs",
+        "ROS 2 official docs"
+      ],
+      "preferred_doc_types": [
+        "concept",
+        "reference",
+        "integration"
+      ],
+      "topic_keywords": [
+        "nitros",
+        "isaac",
+        "ros",
+        "problem",
+        "trying",
+        "solve",
+        "accelerated",
+        "pipelines"
+      ],
+      "routing_debug": {
+        "matched_intent": "factual",
+        "matched_sources": [
+          "Isaac ROS docs",
+          "ROS 2 official docs"
+        ],
+        "matched_doc_types": [
+          "concept",
+          "reference",
+          "integration"
+        ],
+        "topic_keywords": [
+          "nitros",
+          "isaac",
+          "ros",
+          "problem",
+          "trying",
+          "solve",
+          "accelerated",
+          "pipelines"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "What is NITROS in Isaac ROS, and what problem is it trying to solve in accelerated ROS 2 pipelines?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.512258064516129,
+        "title": "CUDA with NITROS",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "CUDA with NITROS",
+          "Overview"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/concepts/nitros/cuda_with_nitros.html",
+        "text_preview": "# CUDA with NITROS ## Overview CUDA is a parallel computing programming model and helps robotic applications to implement functions that would otherwise be too slow on a CPU. CUDA implemented in a ROS 2 node can take..."
+      },
+      {
+        "query": "What is NITROS in Isaac ROS, and what problem is it trying to solve in accelerated ROS 2 pipelines?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.48109932497589203,
+        "title": "Isaac for Manipulation Reference Architecture",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "Isaac for Manipulation Reference Architecture",
+          "What is NVIDIA Isaac for Manipulation?"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/reference_workflows/isaac_for_manipulation/reference_architecture.html",
+        "text_preview": "# Isaac for Manipulation Reference Architecture ## What is NVIDIA Isaac for Manipulation? NVIDIA Isaac for Manipulation is a collection of GPU-accelerated libraries and Isaac ROS packages for perception-driven..."
+      },
+      {
+        "query": "What is NITROS in Isaac ROS, and what problem is it trying to solve in accelerated ROS 2 pipelines?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.4426582278481012,
+        "title": "Tutorial for NITROS Bridge with Isaac Sim",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "Tutorial for NITROS Bridge with Isaac Sim",
+          "Tutorial Walkthrough"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/concepts/nitros_bridge/tutorial_isaac_sim.html",
+        "text_preview": "# Tutorial for NITROS Bridge with Isaac Sim ## Tutorial Walkthrough Clone isaac_ros_common repository under a new workspace: mkdir -p ~/isaac_sim_workspaces && \\ cd ~/isaac_sim_workspaces && \\ git clone -b release-4.3..."
+      },
+      {
+        "query": "What is NITROS in Isaac ROS, and what problem is it trying to solve in accelerated ROS 2 pipelines?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.2717780580075662,
+        "title": "Getting Started",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "Getting Started"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/getting_started/index.html",
+        "text_preview": "# Getting Started Isaac ROS is a collection of NVIDIA® CUDA®-accelerated computing packages and AI models designed to streamline and expedite the development of advanced AI robotics applications. NVIDIA Isaac ROS is..."
+      },
+      {
+        "query": "What is NITROS in Isaac ROS, and what problem is it trying to solve in accelerated ROS 2 pipelines?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.2553846153846154,
+        "title": "isaac_ros_visual_slam",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "isaac_ros_visual_slam",
+          "Troubleshooting",
+          "Isaac ROS Troubleshooting"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_visual_slam/isaac_ros_visual_slam/index.html",
+        "text_preview": "# isaac_ros_visual_slam ## Troubleshooting ### Isaac ROS Troubleshooting For solutions to problems with Isaac ROS, please check here."
+      }
+    ]
+  },
+  {
+    "query": "What are the main motion planning concepts in MoveIt, and how does the planning scene affect planning results?",
+    "category": "factual",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "factual",
+      "preferred_sources": [
+        "MoveIt docs"
+      ],
+      "preferred_doc_types": [
+        "concept",
+        "reference",
+        "integration"
+      ],
+      "topic_keywords": [
+        "main",
+        "motion",
+        "planning",
+        "concepts",
+        "moveit",
+        "scene",
+        "affect",
+        "results"
+      ],
+      "routing_debug": {
+        "matched_intent": "factual",
+        "matched_sources": [
+          "MoveIt docs"
+        ],
+        "matched_doc_types": [
+          "concept",
+          "reference",
+          "integration"
+        ],
+        "topic_keywords": [
+          "main",
+          "motion",
+          "planning",
+          "concepts",
+          "moveit",
+          "scene",
+          "affect",
+          "results"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "What are the main motion planning concepts in MoveIt, and how does the planning scene affect planning results?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.4320184426229508,
+        "title": "Motion Planning",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "Motion Planning",
+          "Motion planning adapters"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/concepts/motion_planning.html",
+        "text_preview": "# Motion Planning ## Motion planning adapters The complete motion planning pipeline chains together a motion planner with other components called planning request adapters. Planning request adapters allow for pre-..."
+      },
+      {
+        "query": "What are the main motion planning concepts in MoveIt, and how does the planning scene affect planning results?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.29964426877470357,
+        "title": "MoveIt Quickstart in RViz",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "MoveIt Quickstart in RViz",
+          "Step 4: Use Motion Planning with the Kinova Gen 3"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/tutorials/quickstart_in_rviz/quickstart_in_rviz_tutorial.html",
+        "text_preview": "# MoveIt Quickstart in RViz ## Step 4: Use Motion Planning with the Kinova Gen 3 Now, you can start motion planning with the Kinova Gen 3 in the MoveIt RViz Plugin. Move the Start State to a desired location. Move the..."
+      },
+      {
+        "query": "What are the main motion planning concepts in MoveIt, and how does the planning scene affect planning results?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.2542857142857143,
+        "title": "Isaac for Manipulation Reference Architecture",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "Isaac for Manipulation Reference Architecture",
+          "Components",
+          "Component 2 - Nvblox for Environment and Obstacle Perception"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/reference_workflows/isaac_for_manipulation/reference_architecture.html",
+        "text_preview": "# Isaac for Manipulation Reference Architecture ## Components ### Component 2 - Nvblox for Environment and Obstacle Perception This component provides a representation of the environment and obstacles in it for..."
+      },
+      {
+        "query": "What are the main motion planning concepts in MoveIt, and how does the planning scene affect planning results?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.2361986301369863,
+        "title": "Getting Started",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "Getting Started",
+          "Next Step"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/tutorials/getting_started/getting_started.html",
+        "text_preview": "# Getting Started ## Next Step Nice job! Next, we will Visualize a robot with the interactive motion planning plugin for RViz"
+      },
+      {
+        "query": "What are the main motion planning concepts in MoveIt, and how does the planning scene affect planning results?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.22298701298701298,
+        "title": "MoveItCpp Tutorial",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "MoveItCpp Tutorial",
+          "The Entire Code",
+          "Plan # 5"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/examples/moveit_cpp/moveitcpp_tutorial.html",
+        "text_preview": "# MoveItCpp Tutorial ## The Entire Code ### Plan # 5 We can also generate motion plans around objects in the collision scene. First we create the collision object moveit_msgs::msg::CollisionObject collision_object;..."
+      }
+    ]
+  },
+  {
+    "query": "What safety actions can PX4 trigger when a failsafe event occurs, such as data link loss or geofence breach?",
+    "category": "factual",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "troubleshooting",
+      "preferred_sources": [
+        "PX4 official docs"
+      ],
+      "preferred_doc_types": [
+        "safety",
+        "troubleshooting",
+        "integration"
+      ],
+      "topic_keywords": [
+        "safety",
+        "actions",
+        "px4",
+        "trigger",
+        "failsafe",
+        "event",
+        "occurs",
+        "such",
+        "data",
+        "link",
+        "loss",
+        "geofence"
+      ],
+      "routing_debug": {
+        "matched_intent": "troubleshooting",
+        "matched_sources": [
+          "PX4 official docs"
+        ],
+        "matched_doc_types": [
+          "safety",
+          "troubleshooting",
+          "integration"
+        ],
+        "topic_keywords": [
+          "safety",
+          "actions",
+          "px4",
+          "trigger",
+          "failsafe",
+          "event",
+          "occurs",
+          "such",
+          "data",
+          "link",
+          "loss",
+          "geofence"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "What safety actions can PX4 trigger when a failsafe event occurs, such as data link loss or geofence breach?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.6022664584959666,
+        "title": "Safety (Failsafe) Configuration",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Safety (Failsafe) Configuration",
+          "Data Link Loss Failsafe"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/config/safety",
+        "text_preview": "# Safety (Failsafe) Configuration ## Data Link Loss Failsafe The Data Link Loss failsafe is triggered if a telemetry link (connection to ground station) is lost. The settings and underlying parameters are shown below...."
+      },
+      {
+        "query": "What safety actions can PX4 trigger when a failsafe event occurs, such as data link loss or geofence breach?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.35252247488101535,
+        "title": "Basic Concepts",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Basic Concepts",
+          "Safety Settings (Failsafe)"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/getting_started/px4_basic_concepts",
+        "text_preview": "# Basic Concepts ## Safety Settings (Failsafe) PX4 has configurable failsafe systems to protect and recover your vehicle if something goes wrong! These allow you to specify areas and conditions under which you can..."
+      },
+      {
+        "query": "What safety actions can PX4 trigger when a failsafe event occurs, such as data link loss or geofence breach?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.29250000000000004,
+        "title": "ROS 2 User Guide",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 User Guide",
+          "Controlling a Vehicle"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
+        "text_preview": "# ROS 2 User Guide ## Controlling a Vehicle To control applications, ROS 2 applications: - subscribe to (listen to) telemetry topics published by PX4 - publish to topics that cause PX4 to perform some action. The..."
+      },
+      {
+        "query": "What safety actions can PX4 trigger when a failsafe event occurs, such as data link loss or geofence breach?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.5417540322580644,
+        "title": "Safety (Failsafe) Configuration",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Safety (Failsafe) Configuration",
+          "Geofence Failsafe"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/config/safety",
+        "text_preview": "# Safety (Failsafe) Configuration ## Geofence Failsafe Geofence sourceGF_SOURCESet whether position source is estimated global position or direct from the GPS device. Preemptive geofence..."
+      },
+      {
+        "query": "What safety actions can PX4 trigger when a failsafe event occurs, such as data link loss or geofence breach?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.540776515151515,
+        "title": "Safety (Failsafe) Configuration",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Safety (Failsafe) Configuration",
+          "Manual Control Loss Failsafe"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/config/safety",
+        "text_preview": "# Safety (Failsafe) Configuration ## Manual Control Loss Failsafe The manual control loss failsafe may be triggered if the connection to the RC transmitter or joystick is lost, and there is no fallback. If using an RC..."
+      }
+    ]
+  },
+  {
+    "query": "How do I install ROS 2 Jazzy on Ubuntu 24.04 and set up the environment for beginner tutorials?",
+    "category": "procedural",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "procedural",
+      "preferred_sources": [
+        "ROS 2 official docs"
+      ],
+      "preferred_doc_types": [
+        "getting_started",
+        "installation",
+        "tutorial"
+      ],
+      "topic_keywords": [
+        "install",
+        "ros",
+        "jazzy",
+        "ubuntu",
+        "set",
+        "environment",
+        "beginner",
+        "tutorials"
+      ],
+      "routing_debug": {
+        "matched_intent": "procedural",
+        "matched_sources": [
+          "ROS 2 official docs"
+        ],
+        "matched_doc_types": [
+          "getting_started",
+          "installation",
+          "tutorial"
+        ],
+        "topic_keywords": [
+          "install",
+          "ros",
+          "jazzy",
+          "ubuntu",
+          "set",
+          "environment",
+          "beginner",
+          "tutorials"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "How do I install ROS 2 Jazzy on Ubuntu 24.04 and set up the environment for beginner tutorials?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.5099107142857143,
+        "title": "Ubuntu (binary)",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Ubuntu (binary)",
+          "We currently support Ubuntu Noble (24.04) 64-bit x86 and 64-bit ARM.",
+          "If you are going to build ROS packages or otherwise do development, you can also install the development tools:"
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Installation/Alternatives/Ubuntu-Install-Binary.html",
+        "text_preview": "# Ubuntu (binary) ## We currently support Ubuntu Noble (24.04) 64-bit x86 and 64-bit ARM. ### If you are going to build ROS packages or otherwise do development, you can also install the development tools: $ sudo apt..."
+      },
+      {
+        "query": "How do I install ROS 2 Jazzy on Ubuntu 24.04 and set up the environment for beginner tutorials?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.4798507462686567,
+        "title": "Installation",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Installation",
+          "Building from source"
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Installation.html",
+        "text_preview": "# Installation ## Building from source We support building ROS 2 from source on the following platforms: Ubuntu Linux 24.04 Windows 10 RHEL-9/Fedora macOS"
+      },
+      {
+        "query": "How do I install ROS 2 Jazzy on Ubuntu 24.04 and set up the environment for beginner tutorials?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.3385947712418301,
+        "title": "Creating a workspace",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Creating a workspace"
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html",
+        "text_preview": "# Creating a workspace Goal: Create a workspace and learn how to set up an overlay for development and testing. Tutorial level: Beginner Time: 20 minutes"
+      },
+      {
+        "query": "How do I install ROS 2 Jazzy on Ubuntu 24.04 and set up the environment for beginner tutorials?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.3327868852459016,
+        "title": "Getting Started",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "Getting Started",
+          "Install ROS 2 and colcon"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/tutorials/getting_started/getting_started.html",
+        "text_preview": "# Getting Started ## Install ROS 2 and colcon MoveIt 2 currently supports multiple versions of ROS. Install whichever version you prefer. We primarily support ROS installed on Ubuntu 22.04 or 24.04 but other methods..."
+      },
+      {
+        "query": "How do I install ROS 2 Jazzy on Ubuntu 24.04 and set up the environment for beginner tutorials?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.2847058823529412,
+        "title": "Getting Started",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "Getting Started",
+          "System Requirements",
+          "ROS Support"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/getting_started/index.html",
+        "text_preview": "# Getting Started ## System Requirements ### ROS Support All Isaac ROS packages are designed and tested to be compatible with ROS 2 Jazzy."
+      }
+    ]
+  },
+  {
+    "query": "How do I create a ROS 2 workspace and build packages with colcon for a new project?",
+    "category": "procedural",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "procedural",
+      "preferred_sources": [
+        "ROS 2 official docs"
+      ],
+      "preferred_doc_types": [
+        "installation",
+        "tutorial",
+        "getting_started"
+      ],
+      "topic_keywords": [
+        "create",
+        "ros",
+        "workspace",
+        "build",
+        "packages",
+        "colcon",
+        "new",
+        "project"
+      ],
+      "routing_debug": {
+        "matched_intent": "procedural",
+        "matched_sources": [
+          "ROS 2 official docs"
+        ],
+        "matched_doc_types": [
+          "installation",
+          "tutorial",
+          "getting_started"
+        ],
+        "topic_keywords": [
+          "create",
+          "ros",
+          "workspace",
+          "build",
+          "packages",
+          "colcon",
+          "new",
+          "project"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "How do I create a ROS 2 workspace and build packages with colcon for a new project?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.5973132664437012,
+        "title": "Creating a workspace",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "All required rosdeps installed successfully",
+          "In this tutorial, you sourced your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace."
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html",
+        "text_preview": "# Creating a workspace ## In this tutorial, you sourced your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace. The overlay gets prepended to the..."
+      },
+      {
+        "query": "How do I create a ROS 2 workspace and build packages with colcon for a new project?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.298612012987013,
+        "title": "Getting Started",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "Getting Started",
+          "Create A Colcon Workspace and Download Tutorials"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/tutorials/getting_started/getting_started.html",
+        "text_preview": "# Getting Started ## Create A Colcon Workspace and Download Tutorials For tutorials you will need to have a colcon workspace setup. mkdir -p ~/ws_moveit/src"
+      },
+      {
+        "query": "How do I create a ROS 2 workspace and build packages with colcon for a new project?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.2980428432327167,
+        "title": "Your First C++ MoveIt Project",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "include <moveit/move_group_interface/move_group_interface.hpp>",
+          "2.1 Build and Run"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/tutorials/your_first_project/your_first_project.html",
+        "text_preview": "# Your First C++ MoveIt Project ## 2.1 Build and Run We will build and run the program to see that everything is right before we move on. Change the directory back to the workspace directory ws_moveit and run this..."
+      },
+      {
+        "query": "How do I create a ROS 2 workspace and build packages with colcon for a new project?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.29658450704225353,
+        "title": "Getting Started",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "Getting Started",
+          "Create a Workspace"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/getting_started/index.html",
+        "text_preview": "# Getting Started ## Create a Workspace x86 Platforms Create a ROS 2 workspace for experimenting with Isaac ROS: mkdir -p ~/workspaces/isaac_ros-dev/src echo 'export..."
+      },
+      {
+        "query": "How do I create a ROS 2 workspace and build packages with colcon for a new project?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.20278688524590163,
+        "title": "ROS 2 User Guide",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 User Guide",
+          "Installation & Setup",
+          "Build ROS 2 Workspace",
+          "Building the Workspace"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
+        "text_preview": "# ROS 2 User Guide ## Installation & Setup ### Build ROS 2 Workspace #### Building the Workspace To create and build the workspace: Open a new terminal. Create and navigate into a new workspace directory using: INFO A..."
+      }
+    ]
+  },
+  {
+    "query": "How do I build PX4 from source and launch a simulator for the first validation run?",
+    "category": "procedural",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "procedural",
+      "preferred_sources": [
+        "PX4 official docs"
+      ],
+      "preferred_doc_types": [
+        "installation",
+        "tutorial",
+        "getting_started"
+      ],
+      "topic_keywords": [
+        "build",
+        "px4",
+        "source",
+        "launch",
+        "simulator",
+        "first",
+        "validation",
+        "run"
+      ],
+      "routing_debug": {
+        "matched_intent": "procedural",
+        "matched_sources": [
+          "PX4 official docs"
+        ],
+        "matched_doc_types": [
+          "installation",
+          "tutorial",
+          "getting_started"
+        ],
+        "topic_keywords": [
+          "build",
+          "px4",
+          "source",
+          "launch",
+          "simulator",
+          "first",
+          "validation",
+          "run"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "How do I build PX4 from source and launch a simulator for the first validation run?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.5529870129870129,
+        "title": "Building PX4 Software",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Building PX4 Software",
+          "First Build (Using a Simulator)"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/dev_setup/building_px4",
+        "text_preview": "# Building PX4 Software ## First Build (Using a Simulator) First we'll build a simulated target using a console environment. This allows us to validate the system setup before moving on to real hardware and an IDE...."
+      },
+      {
+        "query": "How do I build PX4 from source and launch a simulator for the first validation run?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.3774178403755869,
+        "title": "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+          "Micro XRCE-DDS Agent Installation",
+          "Build/Run within ROS 2 Workspace"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/middleware/uxrce_dds",
+        "text_preview": "# uXRCE-DDS (PX4-ROS 2/DDS Bridge) ## Micro XRCE-DDS Agent Installation ### Build/Run within ROS 2 Workspace The agent can be built and launched within a ROS 2 workspace (or build standalone and launched from a..."
+      },
+      {
+        "query": "How do I build PX4 from source and launch a simulator for the first validation run?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.3342857142857143,
+        "title": "ROS 2 User Guide",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 User Guide",
+          "Installation & Setup",
+          "Build ROS 2 Workspace",
+          "Running the Example"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
+        "text_preview": "# ROS 2 User Guide ## Installation & Setup ### Build ROS 2 Workspace #### Running the Example To run the executables that you just built, you need to source local_setup.bash. This provides access to the \"environment..."
+      },
+      {
+        "query": "How do I build PX4 from source and launch a simulator for the first validation run?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.3327868852459016,
+        "title": "Your First C++ MoveIt Project",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "include <moveit/move_group_interface/move_group_interface.hpp>",
+          "2.1 Build and Run",
+          "3 Plan and Execute using MoveGroupInterface",
+          "3.1 Build and Run"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/tutorials/your_first_project/your_first_project.html",
+        "text_preview": "# Your First C++ MoveIt Project ## 2.1 Build and Run ### 3 Plan and Execute using MoveGroupInterface #### 3.1 Build and Run Just like before, we need to build the code before we can run it. In the workspace directory,..."
+      },
+      {
+        "query": "How do I build PX4 from source and launch a simulator for the first validation run?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.31854251012145746,
+        "title": "Simulation",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Simulation",
+          "SITL Simulation Environment",
+          "Starting/Building SITL Simulation"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/simulation/",
+        "text_preview": "# Simulation ## SITL Simulation Environment ### Starting/Building SITL Simulation The build system makes it very easy to build and start PX4 on SITL, launch a simulator, and connect them. The syntax (simplified) looks..."
+      }
+    ]
+  },
+  {
+    "query": "How do I run the PX4 ROS 2 offboard control example from a new colcon workspace?",
+    "category": "procedural",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "procedural",
+      "preferred_sources": [
+        "PX4 official docs",
+        "ROS 2 official docs"
+      ],
+      "preferred_doc_types": [
+        "integration",
+        "installation",
+        "tutorial",
+        "getting_started"
+      ],
+      "topic_keywords": [
+        "run",
+        "px4",
+        "ros",
+        "offboard",
+        "control",
+        "example",
+        "new",
+        "colcon",
+        "workspace"
+      ],
+      "routing_debug": {
+        "matched_intent": "procedural",
+        "matched_sources": [
+          "PX4 official docs",
+          "ROS 2 official docs"
+        ],
+        "matched_doc_types": [
+          "integration",
+          "installation",
+          "tutorial",
+          "getting_started"
+        ],
+        "topic_keywords": [
+          "run",
+          "px4",
+          "ros",
+          "offboard",
+          "control",
+          "example",
+          "new",
+          "colcon",
+          "workspace"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "How do I run the PX4 ROS 2 offboard control example from a new colcon workspace?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.5681746031746031,
+        "title": "ROS 2 User Guide",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 User Guide",
+          "Installation & Setup",
+          "Build ROS 2 Workspace",
+          "Running the Example"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
+        "text_preview": "# ROS 2 User Guide ## Installation & Setup ### Build ROS 2 Workspace #### Running the Example To run the executables that you just built, you need to source local_setup.bash. This provides access to the \"environment..."
+      },
+      {
+        "query": "How do I run the PX4 ROS 2 offboard control example from a new colcon workspace?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.5672121436504998,
+        "title": "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+          "Micro XRCE-DDS Agent Installation",
+          "Build/Run within ROS 2 Workspace"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/middleware/uxrce_dds",
+        "text_preview": "# uXRCE-DDS (PX4-ROS 2/DDS Bridge) ## Micro XRCE-DDS Agent Installation ### Build/Run within ROS 2 Workspace The agent can be built and launched within a ROS 2 workspace (or build standalone and launched from a..."
+      },
+      {
+        "query": "How do I run the PX4 ROS 2 offboard control example from a new colcon workspace?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.4920184426229508,
+        "title": "ROS 2 Offboard Control Example",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 Offboard Control Example",
+          "Trying it out"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/offboard_control",
+        "text_preview": "# ROS 2 Offboard Control Example ## Trying it out Follow the instructions in ROS 2 User Guide to install PX and run the simulator, install ROS 2, and start the XRCE-DDS Agent. After that we can follow a similar set of..."
+      },
+      {
+        "query": "How do I run the PX4 ROS 2 offboard control example from a new colcon workspace?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.42408450704225353,
+        "title": "Creating a workspace",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Creating a workspace",
+          "A workspace is a directory containing ROS 2 packages.",
+          "Before building the workspace, you need to resolve the package dependencies."
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html",
+        "text_preview": "# Creating a workspace ## A workspace is a directory containing ROS 2 packages. ### Before building the workspace, you need to resolve the package dependencies. You may have all the dependencies already, but best..."
+      },
+      {
+        "query": "How do I run the PX4 ROS 2 offboard control example from a new colcon workspace?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.2647058823529412,
+        "title": "Basic Concepts",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Basic Concepts",
+          "Flight Modes"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/getting_started/px4_basic_concepts",
+        "text_preview": "# Basic Concepts ## Flight Modes - Drive Modes (Differential Rover) - Drive Modes (Ackermann Rover) Instructions for how to set up your remote control switches to enable different flight modes is provided in Flight..."
+      }
+    ]
+  },
+  {
+    "query": "How do I set up Isaac ROS on a supported system and run an initial demo after environment setup?",
+    "category": "procedural",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "procedural",
+      "preferred_sources": [
+        "Isaac ROS docs"
+      ],
+      "preferred_doc_types": [
+        "installation",
+        "tutorial",
+        "getting_started"
+      ],
+      "topic_keywords": [
+        "set",
+        "isaac",
+        "ros",
+        "supported",
+        "system",
+        "run",
+        "initial",
+        "demo",
+        "after",
+        "environment",
+        "setup"
+      ],
+      "routing_debug": {
+        "matched_intent": "procedural",
+        "matched_sources": [
+          "Isaac ROS docs"
+        ],
+        "matched_doc_types": [
+          "installation",
+          "tutorial",
+          "getting_started"
+        ],
+        "topic_keywords": [
+          "set",
+          "isaac",
+          "ros",
+          "supported",
+          "system",
+          "run",
+          "initial",
+          "demo",
+          "after",
+          "environment",
+          "setup"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "How do I set up Isaac ROS on a supported system and run an initial demo after environment setup?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.5120184426229508,
+        "title": "Getting Started",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "Getting Started",
+          "Run an Isaac ROS Demo"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/getting_started/index.html",
+        "text_preview": "# Getting Started ## Run an Isaac ROS Demo You’re now ready to run an Isaac ROS demo!"
+      },
+      {
+        "query": "How do I set up Isaac ROS on a supported system and run an initial demo after environment setup?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.5117540322580646,
+        "title": "isaac_ros_visual_slam",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "isaac_ros_visual_slam",
+          "Quickstart",
+          "Run Launch File"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_visual_slam/isaac_ros_visual_slam/index.html",
+        "text_preview": "# isaac_ros_visual_slam ## Quickstart ### Run Launch File RosbagRealSense CameraZED Camera Continuing inside the Isaac ROS environment, install the following dependencies: sudo apt-get update sudo apt-get install -y..."
+      },
+      {
+        "query": "How do I set up Isaac ROS on a supported system and run an initial demo after environment setup?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.5094691224268689,
+        "title": "isaac_ros_cumotion",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "isaac_ros_cumotion",
+          "Robot Segmentation",
+          "Quickstart",
+          "Run Launch File for Robot Segmentation"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_cumotion/isaac_ros_cumotion/index.html",
+        "text_preview": "# isaac_ros_cumotion ## Robot Segmentation ### Quickstart #### Run Launch File for Robot Segmentation Rosbag Continuing inside the Isaac ROS environment, run the following launch file to spin up a demonstration of..."
+      },
+      {
+        "query": "How do I set up Isaac ROS on a supported system and run an initial demo after environment setup?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.3340845070422535,
+        "title": "Tutorial for NITROS Bridge with Isaac Sim",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "Tutorial for NITROS Bridge with Isaac Sim",
+          "Tutorial Walkthrough"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/concepts/nitros_bridge/tutorial_isaac_sim.html",
+        "text_preview": "# Tutorial for NITROS Bridge with Isaac Sim ## Tutorial Walkthrough Clone isaac_ros_common repository under a new workspace: mkdir -p ~/isaac_sim_workspaces && \\ cd ~/isaac_sim_workspaces && \\ git clone -b release-4.3..."
+      },
+      {
+        "query": "How do I set up Isaac ROS on a supported system and run an initial demo after environment setup?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.3138888888888889,
+        "title": "Using ros2doctor to identify issues",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Using ros2doctor to identify issues",
+          "ros2doctor is part of the ros2cli package.",
+          "You can also examine a running ROS 2 system to identify possible causes for issues."
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Getting-Started-With-Ros2doctor.html",
+        "text_preview": "# Using ros2doctor to identify issues ## ros2doctor is part of the ros2cli package. ### You can also examine a running ROS 2 system to identify possible causes for issues. To see ros2doctor working on a running..."
+      }
+    ]
+  },
+  {
+    "query": "How do I set up the MoveIt getting started tutorial workspace and build it from source?",
+    "category": "procedural",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "procedural",
+      "preferred_sources": [
+        "MoveIt docs"
+      ],
+      "preferred_doc_types": [
+        "getting_started",
+        "installation",
+        "tutorial"
+      ],
+      "topic_keywords": [
+        "set",
+        "moveit",
+        "getting",
+        "started",
+        "tutorial",
+        "workspace",
+        "build",
+        "source"
+      ],
+      "routing_debug": {
+        "matched_intent": "procedural",
+        "matched_sources": [
+          "MoveIt docs"
+        ],
+        "matched_doc_types": [
+          "getting_started",
+          "installation",
+          "tutorial"
+        ],
+        "topic_keywords": [
+          "set",
+          "moveit",
+          "getting",
+          "started",
+          "tutorial",
+          "workspace",
+          "build",
+          "source"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "How do I set up the MoveIt getting started tutorial workspace and build it from source?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.6005503731343284,
+        "title": "Getting Started",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "Getting Started",
+          "Download Source Code of MoveIt and the Tutorials"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/tutorials/getting_started/getting_started.html",
+        "text_preview": "# Getting Started ## Download Source Code of MoveIt and the Tutorials Move into your Colcon workspace and pull the MoveIt tutorials source, where <branch> can be e.g. humble for ROS Humble, or main for the latest..."
+      },
+      {
+        "query": "How do I set up the MoveIt getting started tutorial workspace and build it from source?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.4949253731343284,
+        "title": "MoveItCpp Tutorial",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "MoveItCpp Tutorial",
+          "Getting Started"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/examples/moveit_cpp/moveitcpp_tutorial.html",
+        "text_preview": "# MoveItCpp Tutorial ## Getting Started If you haven’t already done so, make sure you’ve completed the steps in Getting Started."
+      },
+      {
+        "query": "How do I set up the MoveIt getting started tutorial workspace and build it from source?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.48252247488101535,
+        "title": "MoveIt Quickstart in RViz",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "MoveIt Quickstart in RViz",
+          "Getting Started"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/tutorials/quickstart_in_rviz/quickstart_in_rviz_tutorial.html",
+        "text_preview": "# MoveIt Quickstart in RViz ## Getting Started If you haven’t already done so, make sure you’ve completed the steps in Getting Started or our Docker Guide. If you followed the Docker Guide, also follow the Create A..."
+      },
+      {
+        "query": "How do I set up the MoveIt getting started tutorial workspace and build it from source?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.44923602219376874,
+        "title": "Your First C++ MoveIt Project",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "include <moveit/move_group_interface/move_group_interface.hpp>",
+          "2.1 Build and Run",
+          "3 Plan and Execute using MoveGroupInterface",
+          "3.1 Build and Run"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/tutorials/your_first_project/your_first_project.html",
+        "text_preview": "# Your First C++ MoveIt Project ## 2.1 Build and Run ### 3 Plan and Execute using MoveGroupInterface #### 3.1 Build and Run Just like before, we need to build the code before we can run it. In the workspace directory,..."
+      },
+      {
+        "query": "How do I set up the MoveIt getting started tutorial workspace and build it from source?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.3426582278481013,
+        "title": "Creating a workspace",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "All required rosdeps installed successfully",
+          "In this tutorial, you sourced your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace."
+        ],
+        "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html",
+        "text_preview": "# Creating a workspace ## In this tutorial, you sourced your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace. The overlay gets prepended to the..."
+      }
+    ]
+  },
+  {
+    "query": "PX4 build fails with a flash overflow error. What usually causes this and how can I fix it?",
+    "category": "troubleshooting",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "troubleshooting",
+      "preferred_sources": [
+        "PX4 official docs"
+      ],
+      "preferred_doc_types": [
+        "troubleshooting",
+        "safety",
+        "integration"
+      ],
+      "topic_keywords": [
+        "px4",
+        "build",
+        "fails",
+        "flash",
+        "overflow",
+        "error",
+        "usually",
+        "causes",
+        "this",
+        "fix"
+      ],
+      "routing_debug": {
+        "matched_intent": "troubleshooting",
+        "matched_sources": [
+          "PX4 official docs"
+        ],
+        "matched_doc_types": [
+          "troubleshooting",
+          "safety",
+          "integration"
+        ],
+        "topic_keywords": [
+          "px4",
+          "build",
+          "fails",
+          "flash",
+          "overflow",
+          "error",
+          "usually",
+          "causes",
+          "this",
+          "fix"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "PX4 build fails with a flash overflow error. What usually causes this and how can I fix it?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.4114980158730159,
+        "title": "Building PX4 Software",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Building PX4 Software",
+          "Troubleshooting",
+          "Flash overflowed by XXX bytes"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/dev_setup/building_px4",
+        "text_preview": "# Building PX4 Software ## Troubleshooting ### Flash overflowed by XXX bytes The region 'flash' overflowed by XXXX bytes error indicates that the firmware is too large for the target hardware platform. This is common..."
+      },
+      {
+        "query": "PX4 build fails with a flash overflow error. What usually causes this and how can I fix it?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.36030303030303035,
+        "title": "Installation troubleshooting",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "All required rosdeps installed successfully",
+          "Sometimes rclpy fails to be imported because of some missing DLLs on your system.",
+          "If you run into the CMake error file INSTALL cannot set modification time on ... when installing files it is likely that an anti virus software or Windows Defender are interfering with the build."
+        ],
+        "url": "https://docs.ros.org/en/jazzy/How-To-Guides/Installation-Troubleshooting.html",
+        "text_preview": "# Installation troubleshooting ## Sometimes rclpy fails to be imported because of some missing DLLs on your system. ### If you run into the CMake error file INSTALL cannot set modification time on ... when installing..."
+      },
+      {
+        "query": "PX4 build fails with a flash overflow error. What usually causes this and how can I fix it?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.2942857142857143,
+        "title": "Simulation",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Simulation"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/simulation/",
+        "text_preview": "# Simulation Simulators allow PX4 flight code to control a computer modeled vehicle in a simulated \"world\". You can interact with this vehicle just as you might with a real vehicle, using QGroundControl, an offboard..."
+      },
+      {
+        "query": "PX4 build fails with a flash overflow error. What usually causes this and how can I fix it?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.29282051282051286,
+        "title": "ROS 2 User Guide",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 User Guide"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
+        "text_preview": "# ROS 2 User Guide The ROS 2-PX4 architecture provides a deep integration between ROS 2 and PX4, allowing ROS 2 subscribers or publisher nodes to interface directly with PX4 uORB topics. This topic provides an..."
+      },
+      {
+        "query": "PX4 build fails with a flash overflow error. What usually causes this and how can I fix it?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.19333333333333333,
+        "title": "Basic Concepts",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Basic Concepts",
+          "Ground Control Stations",
+          "QGroundControl"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/getting_started/px4_basic_concepts",
+        "text_preview": "# Basic Concepts ## Ground Control Stations ### QGroundControl The Dronecode GCS software is called QGroundControl (\"QGC\"). It runs on Windows, Android, MacOS or Linux hardware, and supports a wide range of screen..."
+      }
+    ]
+  },
+  {
+    "query": "A ROS 2 subscriber is not receiving PX4 topic data correctly. Could QoS incompatibility be the reason, and what should I check?",
+    "category": "troubleshooting",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "troubleshooting",
+      "preferred_sources": [
+        "PX4 official docs",
+        "ROS 2 official docs"
+      ],
+      "preferred_doc_types": [
+        "integration",
+        "troubleshooting",
+        "safety"
+      ],
+      "topic_keywords": [
+        "ros",
+        "subscriber",
+        "not",
+        "receiving",
+        "px4",
+        "topic",
+        "data",
+        "correctly",
+        "qos",
+        "incompatibility",
+        "reason",
+        "check"
+      ],
+      "routing_debug": {
+        "matched_intent": "troubleshooting",
+        "matched_sources": [
+          "PX4 official docs",
+          "ROS 2 official docs"
+        ],
+        "matched_doc_types": [
+          "integration",
+          "troubleshooting",
+          "safety"
+        ],
+        "topic_keywords": [
+          "ros",
+          "subscriber",
+          "not",
+          "receiving",
+          "px4",
+          "topic",
+          "data",
+          "correctly",
+          "qos",
+          "incompatibility",
+          "reason",
+          "check"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "A ROS 2 subscriber is not receiving PX4 topic data correctly. Could QoS incompatibility be the reason, and what should I check?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.5427868852459016,
+        "title": "ROS 2 User Guide",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 User Guide",
+          "Compatibility Issues",
+          "ROS 2 Subscriber QoS Settings"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
+        "text_preview": "# ROS 2 User Guide ## Compatibility Issues ### ROS 2 Subscriber QoS Settings ROS 2 code that subscribes to topics published by PX4 must specify a appropriate (compatible) QoS setting in order to listen to topics...."
+      },
+      {
+        "query": "A ROS 2 subscriber is not receiving PX4 topic data correctly. Could QoS incompatibility be the reason, and what should I check?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.4744927536231884,
+        "title": "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+          "Fast-RTPS to uXRCE-DDS Migration Guidelines",
+          "Dependencies do not need to be removed",
+          "Default topic naming convention has changed"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/middleware/uxrce_dds",
+        "text_preview": "# uXRCE-DDS (PX4-ROS 2/DDS Bridge) ## Fast-RTPS to uXRCE-DDS Migration Guidelines ### Dependencies do not need to be removed #### Default topic naming convention has changed The topic naming format changed: -..."
+      },
+      {
+        "query": "A ROS 2 subscriber is not receiving PX4 topic data correctly. Could QoS incompatibility be the reason, and what should I check?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.3833333333333333,
+        "title": "ROS 2 Offboard Control Example",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 Offboard Control Example",
+          "Trying it out"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/offboard_control",
+        "text_preview": "# ROS 2 Offboard Control Example ## Trying it out Follow the instructions in ROS 2 User Guide to install PX and run the simulator, install ROS 2, and start the XRCE-DDS Agent. After that we can follow a similar set of..."
+      },
+      {
+        "query": "A ROS 2 subscriber is not receiving PX4 topic data correctly. Could QoS incompatibility be the reason, and what should I check?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.36250000000000004,
+        "title": "Installation troubleshooting",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Installation troubleshooting",
+          "General troubleshooting techniques apply to all platforms.",
+          "rviz2 may fail to start on a Wayland display system with errors like:"
+        ],
+        "url": "https://docs.ros.org/en/jazzy/How-To-Guides/Installation-Troubleshooting.html",
+        "text_preview": "# Installation troubleshooting ## General troubleshooting techniques apply to all platforms. ### rviz2 may fail to start on a Wayland display system with errors like: QSocketNotifier: Can only be used with threads..."
+      },
+      {
+        "query": "A ROS 2 subscriber is not receiving PX4 topic data correctly. Could QoS incompatibility be the reason, and what should I check?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.20470588235294118,
+        "title": "Low Level Controllers",
+        "source": "MoveIt docs",
+        "version": "main",
+        "section_path": [
+          "In your moveit_controllers.yaml configuration",
+          "Remapping /joint_states topic"
+        ],
+        "url": "https://moveit.picknik.ai/main/doc/examples/controller_configuration/controller_configuration_tutorial.html",
+        "text_preview": "# Low Level Controllers ## Remapping /joint_states topic (TODO: update for ROS2) When you run a move group node, you may need to remap the topic /joint_states to /robot/joint_states, otherwise MoveIt won’t have..."
+      }
+    ]
+  },
+  {
+    "query": "The ros_gz_bridge clock topic is not publishing for PX4 simulation with ROS 2. What version mismatch or setup issue should I investigate?",
+    "category": "troubleshooting",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "troubleshooting",
+      "preferred_sources": [
+        "PX4 official docs",
+        "ROS 2 official docs"
+      ],
+      "preferred_doc_types": [
+        "integration",
+        "troubleshooting",
+        "safety"
+      ],
+      "topic_keywords": [
+        "ros_gz_bridge",
+        "clock",
+        "topic",
+        "not",
+        "publishing",
+        "px4",
+        "simulation",
+        "ros",
+        "version",
+        "mismatch",
+        "setup",
+        "issue"
+      ],
+      "routing_debug": {
+        "matched_intent": "troubleshooting",
+        "matched_sources": [
+          "PX4 official docs",
+          "ROS 2 official docs"
+        ],
+        "matched_doc_types": [
+          "integration",
+          "troubleshooting",
+          "safety"
+        ],
+        "topic_keywords": [
+          "ros_gz_bridge",
+          "clock",
+          "topic",
+          "not",
+          "publishing",
+          "px4",
+          "simulation",
+          "ros",
+          "version",
+          "mismatch",
+          "setup",
+          "issue"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "The ros_gz_bridge clock topic is not publishing for PX4 simulation with ROS 2. What version mismatch or setup issue should I investigate?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.6027868852459016,
+        "title": "ROS 2 User Guide",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "ROS 2 User Guide",
+          "Troubleshooting",
+          "ros_gz_bridge not publishing on the \\clock topic"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
+        "text_preview": "# ROS 2 User Guide ## Troubleshooting ### ros_gz_bridge not publishing on the \\clock topic If your ROS2 nodes use the Gazebo clock as time source but the ros_gz_bridge node doesn't publish anything on the /clock..."
+      },
+      {
+        "query": "The ros_gz_bridge clock topic is not publishing for PX4 simulation with ROS 2. What version mismatch or setup issue should I investigate?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.4605503731343283,
+        "title": "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "uXRCE-DDS (PX4-ROS 2/DDS Bridge)",
+          "DDS Topics YAML"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/middleware/uxrce_dds",
+        "text_preview": "# uXRCE-DDS (PX4-ROS 2/DDS Bridge) ## DDS Topics YAML subscriptions and subscriptions_multi allow us to choose the uORB topic instance that ROS 2 topics are routed to: either a shared instance that may also be getting..."
+      },
+      {
+        "query": "The ros_gz_bridge clock topic is not publishing for PX4 simulation with ROS 2. What version mismatch or setup issue should I investigate?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.39667140825035563,
+        "title": "Simulation",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Simulation",
+          "SITL Simulation Environment"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/simulation/",
+        "text_preview": "# Simulation ## SITL Simulation Environment The diagram below shows a typical SITL simulation environment for any of the supported simulators that use MAVLink (i.e. all of them except Gazebo). The different parts of..."
+      },
+      {
+        "query": "The ros_gz_bridge clock topic is not publishing for PX4 simulation with ROS 2. What version mismatch or setup issue should I investigate?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.3951515151515152,
+        "title": "Installation troubleshooting",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "Installation troubleshooting",
+          "General troubleshooting techniques apply to all platforms.",
+          "Sometimes rclpy fails to be imported because the expected C extension libraries are not found."
+        ],
+        "url": "https://docs.ros.org/en/jazzy/How-To-Guides/Installation-Troubleshooting.html",
+        "text_preview": "# Installation troubleshooting ## General troubleshooting techniques apply to all platforms. ### Sometimes rclpy fails to be imported because the expected C extension libraries are not found. If so, compare the..."
+      },
+      {
+        "query": "The ros_gz_bridge clock topic is not publishing for PX4 simulation with ROS 2. What version mismatch or setup issue should I investigate?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.38515151515151513,
+        "title": "Gazebo Simulation",
+        "source": "PX4 official docs",
+        "version": "v1.16",
+        "section_path": [
+          "Gazebo Simulation",
+          "Further Information"
+        ],
+        "url": "https://docs.px4.io/v1.16/en/sim_gazebo_gz/index",
+        "text_preview": "# Gazebo Simulation ## Further Information - px4-simulation-ignition"
+      }
+    ]
+  },
+  {
+    "query": "Isaac ROS setup is failing because the system does not meet supported platform requirements. What hardware or software constraints should I verify first?",
+    "category": "troubleshooting",
+    "retrieval_mode": "hybrid",
+    "top_k": 5,
+    "query_route": {
+      "intent": "troubleshooting",
+      "preferred_sources": [
+        "Isaac ROS docs"
+      ],
+      "preferred_doc_types": [
+        "troubleshooting",
+        "safety",
+        "integration"
+      ],
+      "topic_keywords": [
+        "isaac",
+        "ros",
+        "setup",
+        "failing",
+        "because",
+        "system",
+        "not",
+        "meet",
+        "supported",
+        "platform",
+        "requirements",
+        "hardware"
+      ],
+      "routing_debug": {
+        "matched_intent": "troubleshooting",
+        "matched_sources": [
+          "Isaac ROS docs"
+        ],
+        "matched_doc_types": [
+          "troubleshooting",
+          "safety",
+          "integration"
+        ],
+        "topic_keywords": [
+          "isaac",
+          "ros",
+          "setup",
+          "failing",
+          "because",
+          "system",
+          "not",
+          "meet",
+          "supported",
+          "platform",
+          "requirements",
+          "hardware"
+        ]
+      }
+    },
+    "results": [
+      {
+        "query": "Isaac ROS setup is failing because the system does not meet supported platform requirements. What hardware or software constraints should I verify first?",
+        "retrieval_mode": "hybrid",
+        "rank": 1,
+        "score": 0.3603657694962043,
+        "title": "Installation troubleshooting",
+        "source": "ROS 2 official docs",
+        "version": "jazzy",
+        "section_path": [
+          "All required rosdeps installed successfully",
+          "Sometimes rclpy fails to be imported because of some missing DLLs on your system.",
+          "If running a ROS binary gives the error:"
+        ],
+        "url": "https://docs.ros.org/en/jazzy/How-To-Guides/Installation-Troubleshooting.html",
+        "text_preview": "# Installation troubleshooting ## Sometimes rclpy fails to be imported because of some missing DLLs on your system. ### If running a ROS binary gives the error: | failed to create process. It is likely the Python..."
+      },
+      {
+        "query": "Isaac ROS setup is failing because the system does not meet supported platform requirements. What hardware or software constraints should I verify first?",
+        "retrieval_mode": "hybrid",
+        "rank": 2,
+        "score": 0.3463934426229508,
+        "title": "Getting Started",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "Getting Started",
+          "System Requirements",
+          "Supported Platforms"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/getting_started/index.html",
+        "text_preview": "# Getting Started ## System Requirements ### Supported Platforms Platform Hardware Software Storage Notes Jetson Jetson Thor (T5000 and T4000) JetPack 7.1 128+ GB NVMe SSD For best performance, ensure that power..."
+      },
+      {
+        "query": "Isaac ROS setup is failing because the system does not meet supported platform requirements. What hardware or software constraints should I verify first?",
+        "retrieval_mode": "hybrid",
+        "rank": 3,
+        "score": 0.3461449077238551,
+        "title": "isaac_ros_visual_slam",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "isaac_ros_visual_slam",
+          "Troubleshooting",
+          "Troubleshooting Suggestions"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_visual_slam/isaac_ros_visual_slam/index.html",
+        "text_preview": "# isaac_ros_visual_slam ## Troubleshooting ### Troubleshooting Suggestions If the pose estimate frames in RViz is drifting from actual real-world poses and you see white dots on nearby objects(refer to the screenshot..."
+      },
+      {
+        "query": "Isaac ROS setup is failing because the system does not meet supported platform requirements. What hardware or software constraints should I verify first?",
+        "retrieval_mode": "hybrid",
+        "rank": 4,
+        "score": 0.3353846153846154,
+        "title": "isaac_ros_cumotion",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          "isaac_ros_cumotion",
+          "Troubleshooting",
+          "Isaac ROS Troubleshooting"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_cumotion/isaac_ros_cumotion/index.html",
+        "text_preview": "# isaac_ros_cumotion ## Troubleshooting ### Isaac ROS Troubleshooting For solutions to problems with Isaac ROS, see troubleshooting."
+      },
+      {
+        "query": "Isaac ROS setup is failing because the system does not meet supported platform requirements. What hardware or software constraints should I verify first?",
+        "retrieval_mode": "hybrid",
+        "rank": 5,
+        "score": 0.2847058823529412,
+        "title": "Isaac for Manipulation Reference Architecture",
+        "source": "Isaac ROS docs",
+        "version": "latest",
+        "section_path": [
+          ". XRDF (Extended Robot Description Format) file - for collision geometry, definition of",
+          "Component 4 - Goal State Estimation",
+          "Component 6 - Hardware Platform"
+        ],
+        "url": "https://nvidia-isaac-ros.github.io/reference_workflows/isaac_for_manipulation/reference_architecture.html",
+        "text_preview": "# Isaac for Manipulation Reference Architecture ## Component 4 - Goal State Estimation ### Component 6 - Hardware Platform This component consists of hardware platforms and robot arm manipulators on which Isaac for..."
+      }
+    ]
+  }
+]
