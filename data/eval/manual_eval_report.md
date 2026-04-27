@@ -1,6 +1,6 @@
 # Manual Workflow Evaluation Report
 
-- Generated at: 2026-04-23T21:05:36
+- Generated at: 2026-04-27T15:52:04
 - LLM enabled: False
 - Case count: 9
 - Workflow breakdown: ask=3, checklist=3, compare=3
@@ -20,7 +20,7 @@
 
 ### Answer
 
-Based on the retrieved documentation, the main procedure is: 1. In this tutorial, you sourced your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace 2. Using overlays is recommended for working on a small number of packages, so you don’t have to put everything in the same workspace and rebuild a huge workspace on every iteration
+Based on the retrieved documentation, the main flow is to Source your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace, then create a workspace.
 
 ### Citations
 
@@ -28,15 +28,15 @@ Based on the retrieved documentation, the main procedure is: 1. In this tutorial
   URL: https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html
   Section: All required rosdeps installed successfully > In this tutorial, you sourced your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace.
   Snippet: # Creating a workspace ## In this tutorial, you sourced your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace. The overlay gets prepended to the...
-- `isaac_ros_docs:getting_started:0004` | Isaac ROS docs | Getting Started | score=0.3966
-  URL: https://nvidia-isaac-ros.github.io/getting_started/index.html
-  Section: Getting Started > Create a Workspace
-  Snippet: # Getting Started ## Create a Workspace x86 Platforms Create a ROS 2 workspace for experimenting with Isaac ROS: mkdir -p ~/workspaces/isaac_ros-dev/src echo 'export...
-- `moveit_docs:getting_started:0003` | MoveIt docs | Getting Started | score=0.3486
-  URL: https://moveit.picknik.ai/main/doc/tutorials/getting_started/getting_started.html
-  Section: Getting Started > Create A Colcon Workspace and Download Tutorials
-  Snippet: # Getting Started ## Create A Colcon Workspace and Download Tutorials For tutorials you will need to have a colcon workspace setup. mkdir -p ~/ws_moveit/src
-- `px4_official_docs:ros_2_user_guide:0011` | PX4 official docs | ROS 2 User Guide | score=0.3328
+- `ros_2_official_docs:installation:0003` | ROS 2 official docs | Installation | score=0.5112
+  URL: https://docs.ros.org/en/jazzy/Installation.html
+  Section: Installation > Which install should you choose?
+  Snippet: # Installation ## Which install should you choose? Installing from binary packages or from source will both result in a fully-functional and usable ROS 2 install. Differences between the options depend on what you...
+- `ros_2_official_docs:ubuntu_binary:0009` | ROS 2 official docs | Ubuntu (binary) | score=0.4128
+  URL: https://docs.ros.org/en/jazzy/Installation/Alternatives/Ubuntu-Install-Binary.html
+  Section: Ubuntu (binary) > Troubleshooting techniques can be found here.
+  Snippet: # Ubuntu (binary) ## Troubleshooting techniques can be found here. If you installed your workspace with colcon as instructed above, “uninstalling” could be just a matter of opening a new terminal and not sourcing the...
+- `px4_official_docs:ros_2_user_guide:0011` | PX4 official docs | ROS 2 User Guide | score=0.3443
   URL: https://docs.px4.io/v1.16/en/ros2/user_guide
   Section: ROS 2 User Guide > Installation & Setup > Build ROS 2 Workspace > Running the Example
   Snippet: # ROS 2 User Guide ## Installation & Setup ### Build ROS 2 Workspace #### Running the Example To run the executables that you just built, you need to source local_setup.bash. This provides access to the "environment...

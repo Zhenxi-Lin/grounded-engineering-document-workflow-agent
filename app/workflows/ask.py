@@ -18,12 +18,72 @@ LOGGER = logging.getLogger(__name__)
 INSUFFICIENT_EVIDENCE_ANSWER = "Available evidence was not sufficient to support a grounded answer."
 SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+|\n+")
 HEADING_RE = re.compile(r"^#{1,6}\s*")
+COMMAND_RE = re.compile(r"^(?:\$|mkdir|cd |source |colcon |git |make |ros2 |python |export |cmake |sudo )", re.IGNORECASE)
 NOISE_PATTERNS = (
     "info",
     "warning",
     "note",
     "further information",
     "source code available on github",
+)
+PROCEDURAL_TERMS = (
+    "install",
+    "setup",
+    "set up",
+    "create",
+    "build",
+    "run",
+    "launch",
+    "source",
+    "configure",
+    "clone",
+    "download",
+    "workspace",
+    "colcon",
+)
+VALIDATION_TERMS = (
+    "verify",
+    "check",
+    "confirm",
+    "ensure",
+    "successfully",
+    "without error",
+    "ros2doctor",
+    "source local_setup",
+    "run the example",
+    "all checks passed",
+)
+LEADING_PROCEDURAL_PREFIX_RE = re.compile(
+    r"^(?:first|next|then|finally|in this tutorial,\s*you|to run .*?,\s*you need to|you need to)\s+",
+    re.IGNORECASE,
+)
+SPECIFIC_PROJECT_TERMS = (
+    "isaac ros",
+    "isaac",
+    "moveit",
+    "px4",
+    "nitros",
+    "cumotion",
+    "offboard",
+    "uorb",
+    "qgroundcontrol",
+)
+PROJECT_SPECIFIC_PATH_MARKERS = (
+    "isaac_ros-dev",
+    "ws_moveit",
+    "px4_",
+    "release-4.",
+    "workspaces/isaac",
+)
+GENERAL_PROCEDURAL_TERMS = (
+    "create a workspace",
+    "creating a workspace",
+    "installation",
+    "setup",
+    "build",
+    "workspace",
+    "colcon",
+    "source",
 )
 
 
@@ -80,10 +140,18 @@ class GroundedQAWorkflow:
             raise ValueError("Query cannot be empty")
 
         route = infer_query_route(normalized_query)
-        results = self.retrieval_service.search(
+        generic_procedural = is_generic_procedural_query(normalized_query, route)
+        raw_top_k = max(self.evidence_top_k * 2, 8) if is_likely_procedural_query(route) else self.evidence_top_k
+        raw_results = self.retrieval_service.search(
             normalized_query,
             mode=self.retrieval_mode,
-            top_k=self.evidence_top_k,
+            top_k=raw_top_k,
+        )
+        results = select_workflow_results(
+            raw_results,
+            query=normalized_query,
+            route=route,
+            limit=self.evidence_top_k,
         )
         citations = build_citations(results, self.retrieval_mode)
 
@@ -95,7 +163,7 @@ class GroundedQAWorkflow:
                 citations=[],
             )
 
-        snippets = collect_evidence_snippets(results, route)
+        snippets = collect_evidence_snippets(results, route, generic_procedural=generic_procedural)
         fallback_answer = build_extractive_answer(
             query=normalized_query,
             route=route,
@@ -132,7 +200,13 @@ class GroundedQAWorkflow:
             return None
 
         try:
-            user_prompt = build_grounded_qa_user_prompt(query=query, evidence_results=results)
+            route = infer_query_route(query)
+            user_prompt = build_grounded_qa_user_prompt(
+                query=query,
+                evidence_results=results,
+                generic_procedural=is_generic_procedural_query(query, route),
+                preferred_sources=route.preferred_sources,
+            )
             llm_payload = self.llm_client.generate_json(
                 system_prompt=SYSTEM_PROMPT,
                 user_prompt=user_prompt,
@@ -157,6 +231,7 @@ def build_extractive_answer(
     snippets: list[EvidenceSnippet],
     citations: list[Citation],
 ) -> GroundedAnswer:
+    is_procedural = is_likely_procedural_query(route)
     if not has_sufficient_evidence(results, snippets, route):
         LOGGER.info("Evidence judged insufficient for query: %s", query)
         return build_insufficient_answer(
@@ -165,9 +240,16 @@ def build_extractive_answer(
             citations=citations,
         )
 
-    answer_text = compose_answer(snippets, route)
-    if not answer_text:
+    answer_payload = compose_answer_payload(snippets, route)
+    if not answer_payload["answer"]:
         LOGGER.info("Could not compose answer text from evidence for query: %s", query)
+        return build_insufficient_answer(
+            query=query,
+            confidence=estimate_confidence(results, snippets, sufficient=False),
+            citations=citations,
+        )
+    if is_procedural and len(answer_payload["key_steps"]) < 3:
+        LOGGER.info("Procedural evidence did not support 3 actionable steps for query: %s", query)
         return build_insufficient_answer(
             query=query,
             confidence=estimate_confidence(results, snippets, sufficient=False),
@@ -176,9 +258,11 @@ def build_extractive_answer(
 
     return GroundedAnswer(
         query=query,
-        answer=answer_text,
+        answer=answer_payload["answer"],
         status="grounded_answer",
         confidence=estimate_confidence(results, snippets, sufficient=True),
+        key_steps=answer_payload["key_steps"],
+        validation_check=answer_payload["validation_check"],
         citations=citations,
     )
 
@@ -194,6 +278,8 @@ def build_insufficient_answer(
         answer=INSUFFICIENT_EVIDENCE_ANSWER,
         status="insufficient_evidence",
         confidence=confidence,
+        key_steps=[],
+        validation_check="",
         citations=citations,
     )
 
@@ -204,22 +290,43 @@ def validate_and_build_llm_answer(
     payload: LLMGroundedAnswerPayload,
     citations: list[Citation],
 ) -> GroundedAnswer:
+    route = infer_query_route(query)
     if payload.status == "grounded_answer" and not payload.answer.strip():
         raise ValueError("LLM grounded_answer payload must include a non-empty answer")
 
     used_citations = map_used_citation_ids(payload.used_citation_ids, citations)
     if payload.status == "grounded_answer" and not used_citations:
         raise ValueError("LLM grounded answer must reference at least one valid citation id")
+    if is_likely_procedural_query(route) and payload.status == "grounded_answer":
+        if not (3 <= len(payload.key_steps) <= 5):
+            raise ValueError("LLM procedural grounded answer must include 3 to 5 key_steps")
+    if payload.status == "grounded_answer" and is_generic_procedural_query(query, route):
+        if contains_project_specific_content(payload.answer):
+            raise ValueError("LLM generic procedural answer overfit to project-specific content")
+        if any(contains_project_specific_content(step) for step in payload.key_steps):
+            raise ValueError("LLM generic procedural key_steps contain project-specific content")
+        if payload.validation_check and contains_project_specific_content(payload.validation_check):
+            raise ValueError("LLM generic procedural validation_check contains project-specific content")
+        if route.preferred_sources:
+            preferred_source = route.preferred_sources[0]
+            if not any(citation.source == preferred_source for citation in used_citations):
+                raise ValueError("LLM generic procedural answer must cite the preferred general source")
 
     answer_text = payload.answer.strip() or INSUFFICIENT_EVIDENCE_ANSWER
+    key_steps = payload.key_steps[:5]
+    validation_check = payload.validation_check.strip()
     if payload.status == "insufficient_evidence":
         answer_text = INSUFFICIENT_EVIDENCE_ANSWER
+        key_steps = []
+        validation_check = ""
 
     return GroundedAnswer(
         query=query,
         answer=answer_text,
         status=payload.status,
         confidence=payload.confidence,
+        key_steps=key_steps,
+        validation_check=validation_check,
         citations=used_citations,
     )
 
@@ -261,12 +368,71 @@ def build_citations(results: list[dict[str, Any]], retrieval_mode: str) -> list[
     return citations
 
 
+def select_workflow_results(
+    results: list[dict[str, Any]],
+    *,
+    query: str,
+    route: QueryRoute,
+    limit: int,
+) -> list[dict[str, Any]]:
+    if not results:
+        return []
+    if not is_likely_procedural_query(route):
+        return results[:limit]
+
+    generic_procedural = is_generic_procedural_query(query, route)
+    scored: list[dict[str, Any]] = []
+    for result in results:
+        entry = dict(result)
+        score = extract_display_score(result, "hybrid")
+        source = str(result.get("source", ""))
+        doc_type = str(result.get("doc_type", ""))
+        combined_text = " ".join(
+            [
+                str(result.get("title", "")),
+                str(result.get("topic", "")),
+                " ".join(str(item) for item in result.get("section_path", [])),
+                format_result_preview(str(result.get("text", "")), max_chars=220),
+            ]
+        ).lower()
+
+        if source in route.preferred_sources:
+            score += 0.16
+        if doc_type in route.preferred_doc_types:
+            score += 0.08
+        if generic_procedural:
+            if route.preferred_sources and source == route.preferred_sources[0]:
+                score += 0.22
+            if any(term in combined_text for term in GENERAL_PROCEDURAL_TERMS):
+                score += 0.08
+            if contains_project_specific_content(combined_text):
+                score -= 0.24
+        entry["_ask_workflow_score"] = score
+        scored.append(entry)
+
+    scored.sort(key=lambda item: item["_ask_workflow_score"], reverse=True)
+    selected: list[dict[str, Any]] = []
+    seen_urls: set[str] = set()
+    for result in scored:
+        url = str(result.get("url", ""))
+        if url in seen_urls and len(selected) >= 2:
+            continue
+        seen_urls.add(url)
+        selected.append(result)
+        if len(selected) >= limit:
+            break
+    return selected
+
+
 def collect_evidence_snippets(
     results: list[dict[str, Any]],
     route: QueryRoute,
+    *,
+    generic_procedural: bool,
 ) -> list[EvidenceSnippet]:
     candidates: list[EvidenceSnippet] = []
     query_keywords = route.topic_keywords
+    is_procedural = is_likely_procedural_query(route)
 
     for chunk_rank, result in enumerate(results, start=1):
         base_score = extract_display_score(result, "hybrid")
@@ -275,7 +441,9 @@ def collect_evidence_snippets(
         doc_type = str(result.get("doc_type", ""))
         source_bonus = get_source_bonus(source, route)
         doc_type_bonus = get_doc_type_bonus(doc_type, route)
-        for unit in split_into_candidate_units(text):
+        for unit in split_into_candidate_units(text, route):
+            if generic_procedural and contains_project_specific_content(unit):
+                continue
             overlap = count_overlap(query_keywords, unit)
             intent_bonus = score_intent_alignment(unit, route)
             if overlap == 0 and intent_bonus == 0.0:
@@ -305,18 +473,30 @@ def collect_evidence_snippets(
 
     candidates.sort(key=lambda item: item.score, reverse=True)
     prioritized = prioritize_routed_snippets(candidates, route)
-    return dedupe_snippets(prioritized, limit=4)
+    return dedupe_snippets(
+        prioritized,
+        limit=5 if is_procedural else 4,
+        max_per_chunk=3 if is_procedural else 2,
+    )
 
 
-def split_into_candidate_units(text: str) -> list[str]:
+def split_into_candidate_units(text: str, route: QueryRoute) -> list[str]:
     units: list[str] = []
-    for raw_piece in SENTENCE_SPLIT_RE.split(text):
-        piece = clean_candidate_text(raw_piece)
-        if not piece:
+    procedural = is_likely_procedural_query(route)
+
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if not line:
             continue
-        if is_noise_piece(piece):
-            continue
-        units.append(piece)
+
+        raw_pieces = [line] if COMMAND_RE.match(line) else SENTENCE_SPLIT_RE.split(line)
+        for raw_piece in raw_pieces:
+            piece = clean_candidate_text(raw_piece)
+            if not piece:
+                continue
+            if is_noise_piece(piece, procedural=procedural):
+                continue
+            units.append(piece)
     return units
 
 
@@ -326,28 +506,33 @@ def clean_candidate_text(text: str) -> str:
     return piece.strip(" -")
 
 
-def is_noise_piece(text: str) -> bool:
+def is_noise_piece(text: str, *, procedural: bool) -> bool:
     lowered = text.lower()
-    if len(lowered) < 35:
+    if len(lowered) < (12 if procedural else 35):
         return True
     if all(char in "#*-_ " for char in lowered):
         return True
     return any(pattern in lowered for pattern in NOISE_PATTERNS)
 
 
-def dedupe_snippets(snippets: list[EvidenceSnippet], *, limit: int) -> list[EvidenceSnippet]:
+def dedupe_snippets(
+    snippets: list[EvidenceSnippet],
+    *,
+    limit: int,
+    max_per_chunk: int,
+) -> list[EvidenceSnippet]:
     selected: list[EvidenceSnippet] = []
     seen_texts: set[str] = set()
-    seen_chunk_ids: set[str] = set()
+    chunk_counts: dict[str, int] = {}
 
     for snippet in snippets:
         normalized = normalize_text(snippet.text)
         if normalized in seen_texts:
             continue
-        if snippet.chunk_id in seen_chunk_ids and len(selected) >= 2:
+        if chunk_counts.get(snippet.chunk_id, 0) >= max_per_chunk:
             continue
         seen_texts.add(normalized)
-        seen_chunk_ids.add(snippet.chunk_id)
+        chunk_counts[snippet.chunk_id] = chunk_counts.get(snippet.chunk_id, 0) + 1
         selected.append(snippet)
         if len(selected) >= limit:
             break
@@ -396,33 +581,43 @@ def has_sufficient_evidence(
     return False
 
 
-def compose_answer(snippets: list[EvidenceSnippet], route: QueryRoute) -> str:
+def compose_answer_payload(
+    snippets: list[EvidenceSnippet],
+    route: QueryRoute,
+) -> dict[str, Any]:
     if not snippets:
-        return ""
+        return {"answer": "", "key_steps": [], "validation_check": ""}
+
+    if is_likely_procedural_query(route):
+        key_steps = extract_key_steps(snippets)
+        validation_check = extract_validation_check(snippets)
+        answer_text = compose_procedural_answer(key_steps)
+        return {
+            "answer": answer_text,
+            "key_steps": key_steps,
+            "validation_check": validation_check,
+        }
 
     answer_snippets = select_answer_snippets(snippets, route)
     selected_texts = [trim_sentence(snippet.text) for snippet in answer_snippets]
     selected_texts = [text for text in selected_texts if text]
     if not selected_texts:
-        return ""
-
-    if route.intent == "procedural":
-        steps = [convert_to_step_text(text) for text in selected_texts[:3]]
-        return "Based on the retrieved documentation, the main procedure is: " + " ".join(
-            f"{index}. {step}" for index, step in enumerate(steps, start=1)
-        )
+        return {"answer": "", "key_steps": [], "validation_check": ""}
 
     if route.intent == "troubleshooting":
         checks = [convert_to_check_text(text) for text in selected_texts[:3]]
-        return "Based on the retrieved documentation, the most relevant checks are: " + " ".join(
+        answer_text = "Based on the retrieved documentation, the most relevant checks are: " + " ".join(
             f"{index}. {item}" for index, item in enumerate(checks, start=1)
         )
+        return {"answer": answer_text, "key_steps": [], "validation_check": ""}
 
     first = selected_texts[0]
     remainder = " ".join(selected_texts[1:3])
     if remainder:
-        return f"Based on the retrieved documentation, {first} {remainder}"
-    return f"Based on the retrieved documentation, {first}"
+        answer_text = f"Based on the retrieved documentation, {first} {remainder}"
+    else:
+        answer_text = f"Based on the retrieved documentation, {first}"
+    return {"answer": answer_text, "key_steps": [], "validation_check": ""}
 
 
 def select_answer_snippets(
@@ -472,6 +667,126 @@ def select_answer_snippets(
     return selected
 
 
+def extract_key_steps(snippets: list[EvidenceSnippet]) -> list[str]:
+    if not snippets:
+        return []
+
+    primary_chunk_id = snippets[0].chunk_id
+    primary_source = snippets[0].source
+    steps: list[str] = []
+    seen: set[str] = set()
+    preferred_order = (
+        [snippet for snippet in snippets if snippet.chunk_id == primary_chunk_id]
+        + [snippet for snippet in snippets if snippet.chunk_id != primary_chunk_id and snippet.source == primary_source]
+        + [snippet for snippet in snippets if snippet.source != primary_source]
+    )
+
+    for snippet in preferred_order:
+        candidate = normalize_step_text(snippet.text)
+        for raw_candidate in iter_procedural_step_candidates(snippet, primary_source):
+            candidate = normalize_step_text(raw_candidate)
+            if not candidate:
+                continue
+            normalized = normalize_text(candidate)
+            if normalized in seen:
+                continue
+            if not looks_like_procedural_step(candidate):
+                continue
+            if should_skip_procedural_step(candidate):
+                continue
+            seen.add(normalized)
+            steps.append(candidate)
+            if len(steps) >= 5:
+                break
+        if len(steps) >= 5:
+            break
+
+    return steps
+
+
+def extract_validation_check(snippets: list[EvidenceSnippet]) -> str:
+    for snippet in snippets:
+        candidate = trim_sentence(snippet.text)
+        lowered = candidate.lower()
+        if any(term in lowered for term in VALIDATION_TERMS):
+            return candidate
+    return ""
+
+
+def looks_like_procedural_step(text: str) -> bool:
+    lowered = text.lower()
+    if COMMAND_RE.match(text):
+        return True
+    if lowered.startswith(("source ", "create ", "build ", "install ", "run ", "launch ", "configure ", "clone ", "download ", "navigate ", "open ", "start ")):
+        return True
+    if "you need to" in lowered:
+        return True
+    if any(term in lowered for term in PROCEDURAL_TERMS):
+        return True
+    return False
+
+
+def should_skip_procedural_step(text: str) -> bool:
+    lowered = text.lower()
+    generic_labels = {
+        "installation",
+        "getting started",
+        "overview",
+        "ubuntu (binary)",
+    }
+    skip_patterns = (
+        "recommended",
+        "which install should you choose",
+        "general use",
+        "differences between the options",
+        "installed successfully",
+    )
+    if lowered in generic_labels:
+        return True
+    return any(pattern in lowered for pattern in skip_patterns)
+
+
+def normalize_step_text(text: str) -> str:
+    cleaned = trim_sentence(text)
+    cleaned = LEADING_PROCEDURAL_PREFIX_RE.sub("", cleaned)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip(" -")
+    if not cleaned:
+        return ""
+    cleaned = convert_leading_verb_to_imperative(cleaned)
+    if COMMAND_RE.match(cleaned):
+        return cleaned
+    if cleaned[0].islower():
+        cleaned = cleaned[0].upper() + cleaned[1:]
+    return cleaned
+
+
+def iter_procedural_step_candidates(
+    snippet: EvidenceSnippet,
+    primary_source: str,
+) -> list[str]:
+    candidates = [snippet.text]
+
+    if snippet.source == primary_source:
+        for section in reversed(snippet.section_path):
+            section_text = str(section).strip()
+            if not section_text:
+                continue
+            candidates.append(section_text)
+
+    return candidates
+
+
+def compose_procedural_answer(key_steps: list[str]) -> str:
+    if not key_steps:
+        return ""
+    if len(key_steps) == 1:
+        return f"Based on the retrieved documentation, the task starts by {lowercase_initial(key_steps[0])}."
+    return (
+        "Based on the retrieved documentation, the main flow is to "
+        f"{lowercase_initial(key_steps[0])}, then {lowercase_initial(key_steps[1])}."
+    )
+
+
 def trim_sentence(text: str) -> str:
     cleaned = text.strip()
     return cleaned.rstrip(".")
@@ -482,6 +797,38 @@ def convert_to_step_text(text: str) -> str:
 
 
 def convert_to_check_text(text: str) -> str:
+    return text
+
+
+def lowercase_initial(text: str) -> str:
+    stripped = text.strip()
+    if not stripped:
+        return ""
+    if COMMAND_RE.match(stripped):
+        return stripped
+    return stripped[0].lower() + stripped[1:]
+
+
+def convert_leading_verb_to_imperative(text: str) -> str:
+    replacements = {
+        "sourced ": "Source ",
+        "created ": "Create ",
+        "built ": "Build ",
+        "cloned ": "Clone ",
+        "installed ": "Install ",
+        "configured ": "Configure ",
+        "launched ": "Launch ",
+        "downloaded ": "Download ",
+        "navigated ": "Navigate ",
+        "ran ": "Run ",
+        "changed ": "Change ",
+        "creating ": "Create ",
+        "building ": "Build ",
+    }
+    lowered = text.lower()
+    for prefix, replacement in replacements.items():
+        if lowered.startswith(prefix):
+            return replacement + text[len(prefix):]
     return text
 
 
@@ -507,6 +854,24 @@ def estimate_confidence(
 def count_overlap(query_keywords: list[str], text: str) -> int:
     lowered = text.lower()
     return sum(1 for keyword in query_keywords if keyword in lowered)
+
+
+def is_likely_procedural_query(route: QueryRoute) -> bool:
+    return route.intent == "procedural"
+
+
+def is_generic_procedural_query(query: str, route: QueryRoute) -> bool:
+    if not is_likely_procedural_query(route):
+        return False
+    lowered = query.lower()
+    return not any(term in lowered for term in SPECIFIC_PROJECT_TERMS)
+
+
+def contains_project_specific_content(text: str) -> bool:
+    lowered = text.lower()
+    if any(marker in lowered for marker in PROJECT_SPECIFIC_PATH_MARKERS):
+        return True
+    return any(term in lowered for term in SPECIFIC_PROJECT_TERMS)
 
 
 def score_intent_alignment(text: str, route: QueryRoute) -> float:

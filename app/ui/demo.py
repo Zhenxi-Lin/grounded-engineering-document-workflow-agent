@@ -94,6 +94,8 @@ def render_ask_result(result: dict[str, Any]) -> None:
     )
     st.subheader("Answer")
     st.write(result.get("answer", ""))
+    render_text_list("Key Steps", result.get("key_steps", []), ordered=True)
+    render_optional_text("Validation Check", str(result.get("validation_check", "")).strip())
     render_citations(result.get("citations", []))
     with st.expander("Raw JSON"):
         st.json(result)
@@ -143,6 +145,14 @@ def render_text_list(title: str, items: list[Any], *, ordered: bool = False) -> 
         st.markdown(f"{prefix}{item}")
 
 
+def render_optional_text(title: str, text: str) -> None:
+    st.subheader(title)
+    if not text:
+        st.caption("None")
+        return
+    st.write(text)
+
+
 def main() -> None:
     st.set_page_config(
         page_title="Grounded Engineering Document Workflow Agent",
@@ -173,12 +183,18 @@ def main() -> None:
     ask_tab, compare_tab, checklist_tab = st.tabs(["Ask", "Compare", "Checklist"])
 
     with ask_tab:
-        st.write("Ask a grounded engineering question over the indexed documentation.")
+        st.write(
+            "Ask a grounded engineering question over the indexed documentation. "
+            "Procedural questions will return a short answer plus key steps when supported by evidence."
+        )
         ask_query = st.text_area(
             "Ask Query",
             value="How do I create a ROS 2 workspace and build packages with colcon for a new project?",
             height=100,
             key="ask_query",
+        )
+        st.caption(
+            "For generic setup or workspace questions, the Ask workflow now prefers more general official steps and avoids treating project-specific paths as universal defaults."
         )
         if st.button("Run Ask", use_container_width=True):
             with st.spinner("Running grounded Q&A..."):

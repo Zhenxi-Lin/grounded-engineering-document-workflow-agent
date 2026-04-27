@@ -26,7 +26,7 @@
 
 ## 系统架构
 
-![系统架构图](structure.png)
+![系统架构图](mypic/structure.png)
 
 系统采用显式流水线，而不是自由规划式 agent：
 
@@ -243,6 +243,30 @@ GROUNDED_CHECKLIST_LLM_BASE_URL=https://api.deepseek.com
 - 展示结构化输出
 - 展示 citations
 - 支持开关 LLM synthesis
+
+### 界面截图
+
+#### Ask Demo
+
+![Ask Demo](mypic/demo_ask.png)
+
+#### Compare Demo
+
+![Compare Demo](mypic/demo_compare.png)
+
+#### Checklist Demo
+
+![Checklist Demo](mypic/demo_checklist.png)
+
+### 演示视频
+
+GitHub 上最稳定的方式是直接提供仓库内视频链接：
+
+- [点击查看演示视频](video/demo.webm)
+
+如果当前 GitHub 页面支持内嵌视频预览，也可以直接查看下面这个播放器：
+
+<video src="video/demo.webm" controls width="100%"></video>
 
 运行方式：
 

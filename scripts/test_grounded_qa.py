@@ -17,7 +17,7 @@ from app.workflows.ask import build_grounded_qa_workflow
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run grounded Q&A over the local engineering document corpus."
+        description="Run grounded Q&A over the local engineering document corpus, including procedural step summaries when supported."
     )
     parser.add_argument(
         "query",

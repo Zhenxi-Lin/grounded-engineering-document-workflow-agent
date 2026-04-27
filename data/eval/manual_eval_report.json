@@ -1,9 +1,9 @@
 {
   "run_metadata": {
-    "generated_at": "2026-04-23T21:05:36",
+    "generated_at": "2026-04-27T15:52:04",
     "llm_enabled": false,
-    "eval_set_path": "D:\\Desktop\\记事本\\obsidian\\苏州外企\\Grounded_Engineering_Document_Workflow_Agent\\data\\eval\\manual_eval_set.json",
-    "index_dir": "D:\\Desktop\\记事本\\obsidian\\苏州外企\\Grounded_Engineering_Document_Workflow_Agent\\data\\index"
+    "eval_set_path": "D:\\Desktop\\Notepad\\obsidian\\mynotepad\\Grounded_Engineering_Document_Workflow_Agent\\data\\eval\\manual_eval_set.json",
+    "index_dir": "D:\\Desktop\\Notepad\\obsidian\\mynotepad\\Grounded_Engineering_Document_Workflow_Agent\\data\\index"
   },
   "summary": {
     "case_count": 9,
@@ -35,9 +35,15 @@
       "llm_enabled": false,
       "result": {
         "query": "How do I create a ROS 2 workspace and build packages with colcon for a new project?",
-        "answer": "Based on the retrieved documentation, the main procedure is: 1. In this tutorial, you sourced your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace 2. Using overlays is recommended for working on a small number of packages, so you don’t have to put everything in the same workspace and rebuild a huge workspace on every iteration",
+        "answer": "Based on the retrieved documentation, the main flow is to Source your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace, then create a workspace.",
         "status": "grounded_answer",
         "confidence": 0.9,
+        "key_steps": [
+          "Source your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace",
+          "Create a workspace",
+          "Installing from binary packages or from source will both result in a fully-functional and usable ROS 2 install"
+        ],
+        "validation_check": "",
         "citations": [
           {
             "chunk_id": "ros_2_official_docs:creating_a_workspace:0011",
@@ -53,30 +59,30 @@
             "snippet": "# Creating a workspace ## In this tutorial, you sourced your main ROS 2 distro install as your underlay, and created an overlay by cloning and building packages in a new workspace. The overlay gets prepended to the..."
           },
           {
-            "chunk_id": "isaac_ros_docs:getting_started:0004",
-            "title": "Getting Started",
-            "source": "Isaac ROS docs",
-            "version": "latest",
+            "chunk_id": "ros_2_official_docs:installation:0003",
+            "title": "Installation",
+            "source": "ROS 2 official docs",
+            "version": "jazzy",
             "section_path": [
-              "Getting Started",
-              "Create a Workspace"
+              "Installation",
+              "Which install should you choose?"
             ],
-            "url": "https://nvidia-isaac-ros.github.io/getting_started/index.html",
-            "score": 0.3966,
-            "snippet": "# Getting Started ## Create a Workspace x86 Platforms Create a ROS 2 workspace for experimenting with Isaac ROS: mkdir -p ~/workspaces/isaac_ros-dev/src echo 'export..."
+            "url": "https://docs.ros.org/en/jazzy/Installation.html",
+            "score": 0.5112,
+            "snippet": "# Installation ## Which install should you choose? Installing from binary packages or from source will both result in a fully-functional and usable ROS 2 install. Differences between the options depend on what you..."
           },
           {
-            "chunk_id": "moveit_docs:getting_started:0003",
-            "title": "Getting Started",
-            "source": "MoveIt docs",
-            "version": "main",
+            "chunk_id": "ros_2_official_docs:ubuntu_binary:0009",
+            "title": "Ubuntu (binary)",
+            "source": "ROS 2 official docs",
+            "version": "jazzy",
             "section_path": [
-              "Getting Started",
-              "Create A Colcon Workspace and Download Tutorials"
+              "Ubuntu (binary)",
+              "Troubleshooting techniques can be found here."
             ],
-            "url": "https://moveit.picknik.ai/main/doc/tutorials/getting_started/getting_started.html",
-            "score": 0.3486,
-            "snippet": "# Getting Started ## Create A Colcon Workspace and Download Tutorials For tutorials you will need to have a colcon workspace setup. mkdir -p ~/ws_moveit/src"
+            "url": "https://docs.ros.org/en/jazzy/Installation/Alternatives/Ubuntu-Install-Binary.html",
+            "score": 0.4128,
+            "snippet": "# Ubuntu (binary) ## Troubleshooting techniques can be found here. If you installed your workspace with colcon as instructed above, “uninstalling” could be just a matter of opening a new terminal and not sourcing the..."
           },
           {
             "chunk_id": "px4_official_docs:ros_2_user_guide:0011",
@@ -90,7 +96,7 @@
               "Running the Example"
             ],
             "url": "https://docs.px4.io/v1.16/en/ros2/user_guide",
-            "score": 0.3328,
+            "score": 0.3443,
             "snippet": "# ROS 2 User Guide ## Installation & Setup ### Build ROS 2 Workspace #### Running the Example To run the executables that you just built, you need to source local_setup.bash. This provides access to the \"environment..."
           }
         ]
@@ -114,6 +120,8 @@
         "answer": "Based on the retrieved documentation, CUDA implemented in a ROS 2 node can take advantage of NITROS, the Isaac ROS implementation of type By using the NITROS publisher, CUDA code in a ROS node can share its output in GPU accelerated memory",
         "status": "grounded_answer",
         "confidence": 0.9,
+        "key_steps": [],
+        "validation_check": "",
         "citations": [
           {
             "chunk_id": "isaac_ros_docs:cuda_with_nitros:0000",
@@ -187,6 +195,8 @@
         "answer": "Based on the retrieved documentation, the most relevant checks are: 1. This is common for make px4_fmu-v2_default builds, where the flash size is limited to 1MB 2. The region 'flash' overflowed by XXXX bytes error indicates that the firmware is too large for the target hardware platform",
         "status": "grounded_answer",
         "confidence": 0.9,
+        "key_steps": [],
+        "validation_check": "",
         "citations": [
           {
             "chunk_id": "px4_official_docs:building_px4_software:0009",

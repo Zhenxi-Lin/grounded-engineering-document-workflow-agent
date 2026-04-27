@@ -28,6 +28,8 @@ class GroundedAnswer:
     answer: str
     status: str
     confidence: float
+    key_steps: list[str] = field(default_factory=list)
+    validation_check: str = ""
     citations: list[Citation] = field(default_factory=list)
 
     def __post_init__(self) -> None:
@@ -45,6 +47,8 @@ class LLMGroundedAnswerPayload:
     answer: str
     status: str
     confidence: float
+    key_steps: list[str]
+    validation_check: str
     used_citation_ids: list[str]
 
     def __post_init__(self) -> None:
@@ -56,11 +60,16 @@ class LLMGroundedAnswerPayload:
         answer = str(payload.get("answer", "")).strip()
         status = str(payload.get("status", "")).strip()
         raw_confidence = payload.get("confidence", 0.0)
+        raw_key_steps = payload.get("key_steps", [])
+        validation_check = str(payload.get("validation_check", "")).strip()
         used_citation_ids = payload.get("used_citation_ids", [])
 
+        if not isinstance(raw_key_steps, list):
+            raise ValueError("key_steps must be a list")
         if not isinstance(used_citation_ids, list):
             raise ValueError("used_citation_ids must be a list")
 
+        normalized_steps = [str(item).strip() for item in raw_key_steps if str(item).strip()]
         normalized_ids = [str(item).strip() for item in used_citation_ids if str(item).strip()]
         confidence = max(0.0, min(float(raw_confidence), 1.0))
 
@@ -68,5 +77,7 @@ class LLMGroundedAnswerPayload:
             answer=answer,
             status=status,
             confidence=confidence,
+            key_steps=normalized_steps,
+            validation_check=validation_check,
             used_citation_ids=normalized_ids,
         )
