@@ -6,7 +6,7 @@
 - 文档 / 流程 Compare
 - Checklist Extraction
 
-项目目标不是做自由式智能体，而是做一个结构清晰、可调试、可演示、适合作品集展示的工程化 AI workflow 系统。
+项目目标不是做自由式智能体，而是做一个结构清晰、可调试的工程化 AI workflow 系统。
 
 ## 项目概述
 
@@ -258,15 +258,13 @@ GROUNDED_CHECKLIST_LLM_BASE_URL=https://api.deepseek.com
 
 ![Checklist Demo](mypic/demo_checklist.png)
 
-### 演示视频
+### GIF 预览
 
-GitHub 上最稳定的方式是直接提供仓库内视频链接：
+![Demo GIF](video/demo.gif)
 
-- [点击查看演示视频](video/demo.webm)
+### 高清视频
 
-如果当前 GitHub 页面支持内嵌视频预览，也可以直接查看下面这个播放器：
-
-<video src="video/demo.webm" controls width="100%"></video>
+- [点击查看完整演示视频](video/demo.webm)
 
 运行方式：
 
